@@ -1,0 +1,88 @@
+// Colors
+
+$primary-text: #434343;
+$secondary-text: #737373;
+$tertiary-text: #838383;
+$quaternary-text: #939393;
+$quinary-text: #E3E3E3;
+
+$primary-brand-color: #F97960;
+$secondary-brand-color: #FCA057;
+
+$primary-color: #325194;
+$primary-hover-color: #3F66BA;
+$primary-active-color: #253C6E;
+$primary-focus-color: #5589FA;
+
+$secondary-color: #177A53;
+$secondary-hover-color: #1FA16D;
+$secondary-active-color: #105439;
+$secondary-focus-color: #2BD691;
+
+$primary-white: #FFFFFF;
+$secondary-white: #FBFBFB;
+
+$success-text: #15963E;
+$error-text: #E3504D;
+
+$bg-color: #FFF9F5;
+$border-color: $quinary-text;
+$border-color-disabled: #5e5e5e;
+$button-background-default: $secondary-text;
+
+// Fonts
+
+// Families
+$primary-font: "Inter", Arial, Helvetica, sans-serif;
+$secondary-font: "Raleway", "Trebuchet MS", Helvetica, sans-serif;
+
+// Weight
+$extralight: 200;
+$light: 300;
+$normal: 400;
+$semibold: 500;
+$bold: 600;
+$extrabold: 700;
+
+// Others
+$letter-spacing: 3px;
+$line-height: 120%;
+
+// Sizes
+$font-size-base: 10px;
+
+$size-larger: 20px;
+$size-large: 18px;
+$size-normal: 16px;
+$size-small: 14px;
+$size-smaller: 13px;
+$size-tiny: 12px;
+
+// Headings
+$h1-size: 40px;
+$h2-size: 30px;
+$h3-size: 22px;
+$h4-size: 18px;
+$h5-size: 16px;
+$h6-size: 14px;
+
+// Labels
+$label-large: $size-large;
+$label-small: $size-small;
+
+// Inputs
+$input-normal: $size-small;
+$input-large-padding: 18px;
+$input-small-padding: 10px;
+
+// Buttons
+$size-border-small: 1px;
+$size-border-large: 2px;
+$size-radius: 6px;
+
+// Flex layout
+
+$gap: 5px;
+
+// Media
+$min-mobile: 480px;

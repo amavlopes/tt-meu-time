@@ -1,0 +1,35 @@
+@import "./variables";
+@import "./mixins";
+
+* {
+    color: $secondary-text;
+    font-weight: $normal;
+    font-size: $font-size-base;
+    line-height: $line-height;
+    font-family: $primary-font;
+    box-sizing: border-box;
+
+    &:focus-visible {
+      outline: 0 none;
+    }
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+  background: $bg-color url('/assets/bg-patterns.jpg') no-repeat 0 0;
+  background-size: cover;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  @include flexbox(0, 'row');
+}
+
+p {
+  @include fontSize($size-normal);
+  margin: 0 0 calculateRem($size-normal);
+}

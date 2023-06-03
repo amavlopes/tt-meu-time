@@ -1,0 +1,119 @@
+@import "./variables";
+
+// Generals
+
+@mixin HexToRgba($color, $opacity: 0.3) {
+  background: $color;
+  background: rgba($color, $opacity);
+}
+
+@function calculateRem($size) {
+  $remSize: calc($size / $font-size-base);
+  @return #{$remSize}rem;
+}
+
+@mixin fontSize($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
+
+@mixin not($selectors...) {
+  $selectorResult: ();
+  @each $selector in $selectors {
+    $selectorResult: append($selectorResult, $selector, $separator: comma);
+  }
+
+  &:not(#{$selectorResult}) {
+    @content;
+  }
+}
+
+// Fonts
+
+@mixin headings {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+      @content;
+  }
+}
+
+// States
+
+@mixin hover() {
+  &:hover {
+    @content;
+  }
+}
+
+@mixin focus() {
+  &:focus, &:focus-visible, &:focus-within {
+    @content;
+  }
+}
+
+@mixin active() {
+  &:active {
+    @content;
+  }
+}
+
+// Layouts
+
+@mixin flexbox($gap: $gap, $direction: 'column'){
+  display: flex;
+  flex-direction: #{$direction};
+  gap: $gap;
+}
+
+// Styles
+
+@mixin reset() {
+  all: unset;
+  outline: revert;
+}
+
+@mixin button-outlined {
+  &--outlined {
+    background-color: transparent;
+    line-height: calculateRem($size-small);
+    letter-spacing: 0;
+    @include fontSize($size-small);
+
+    @content;
+  }
+}
+
+@mixin padding($pxHorizontalPadding, $pxVerticalPadding: 0) {
+  $fontSize: $font-size-base;
+  $result: 0;
+
+  @if $pxVerticalPadding == 0 {
+    $result: #{calc($pxHorizontalPadding/$fontSize)}rem;
+  } @else {
+    $result: #{calc($pxHorizontalPadding/$fontSize)}rem #{calc($pxVerticalPadding/calc($fontSize))}rem;
+  }
+
+  padding: $result;
+}
+
+@mixin transitions($properties...) {
+  $transition: ();
+  @each $property in $properties {
+    $transition: append($transition, ($property 0.2s cubic-bezier(0.42, 0, 0.58, 1)), $separator: comma);
+  }
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin mobile($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}

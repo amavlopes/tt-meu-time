@@ -1,0 +1,59 @@
+@import "./variables";
+@import "./mixins";
+
+@include headings {
+    color: $primary-text;
+    font-family: $secondary-font;
+    font-weight: $extrabold;
+}
+
+h1 {
+  @include fontSize($h1-size);
+}
+
+h2 {
+  @include fontSize($h2-size);
+}
+
+h3 {
+  @include fontSize($h3-size);
+}
+
+h4 {
+  @include fontSize($h4-size);
+}
+
+h5 {
+  @include fontSize($h5-size);
+}
+
+h6 {
+  @include fontSize($h6-size);
+}
+
+
+@include mobile($min-mobile) {
+  h1 {
+    @include fontSize($h2-size);
+  }
+
+  h2 {
+    @include fontSize($h3-size);
+  }
+
+  h3 {
+    @include fontSize($h4-size);
+  }
+
+  h4 {
+    @include fontSize($h5-size);
+  }
+
+  h5 {
+    @include fontSize($h6-size);
+  }
+
+  h6 {
+    @include fontSize($h6-size);
+  }
+}
