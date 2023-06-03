@@ -1,0 +1,55 @@
+@import "/src/app/scss/variables";
+@import "/src/app/scss/mixins";
+
+.lg-container {
+  max-width: 420px;
+
+  .group {
+    &__h1 {
+      margin: 0;
+    }
+
+    &__h2 {
+      line-height: 130%;
+      margin: calculateRem(60px) 0;
+    }
+  }
+}
+
+.lg-form {
+  @include flexbox(calculateRem(15px));
+
+  &__row {
+    @include flexbox;
+  }
+
+  &__control {
+    @include flexbox;
+    margin-bottom: calculateRem(5px);
+  }
+
+  &__text {
+    font-size: calculateRem($size-small);
+    margin: 0;
+  }
+
+}
+
+@include mobile($min-mobile) {
+  .lg-container {
+    max-width: 100%;
+    padding: 0 calculateRem(20px);
+  }
+
+  .group {
+    &__h2 {
+      margin: calculateRem(40px) 0;
+    }
+  }
+
+  .lg-form {
+    p {
+      font-size: calculateRem($size-smaller);
+    }
+  }
+}

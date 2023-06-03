@@ -80,7 +80,6 @@
   &--outlined {
     background-color: transparent;
     line-height: calculateRem($size-small);
-    letter-spacing: 0;
     @include fontSize($size-small);
 
     @content;

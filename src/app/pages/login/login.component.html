@@ -10,7 +10,7 @@
       <div class="lg-form__control">
         <label class="lg-form__label label--large">Digite sua API key</label>
         <input
-          class="input--large input"
+          class="input--large input--primary input"
           type="text"
           placeholder="xXxXxXxXxXxXxXxXxX"
           formControlName="apiKey"
@@ -18,7 +18,7 @@
         <div class="validation" *ngIf="apiKey.touched || apiKey.dirty">
           <p
             class="validation__message validation--alert"
-            *ngIf="apiKey.hasError('required') && !apiKey.hasError('required')"
+            *ngIf="apiKey.hasError('required')"
           >
             *Campo obrigatório: API key
           </p>
@@ -40,7 +40,7 @@
     </div>
     <div class="lg-form__row">
       <p class="lg-form__text">Não possui uma API key?</p>
-      <button class="secondary-button button--large button" type="button">
+      <button class="primary-button--outlined button--small button" type="button">
         Criar API key
       </button>
     </div>
