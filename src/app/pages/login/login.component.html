@@ -1,0 +1,48 @@
+<div class="lg-container">
+  <div class="group">
+    <h1 class="group__h1">Bem vindo(a),</h1>
+    <h2 class="group__h2">
+      saiba tudo sobre as ligas e copas ao redor do mundo.
+    </h2>
+  </div>
+  <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="lg-form__row">
+      <div class="lg-form__control">
+        <label class="lg-form__label label--large">Digite sua API key</label>
+        <input
+          class="input--large input"
+          type="text"
+          placeholder="xXxXxXxXxXxXxXxXxX"
+          formControlName="apiKey"
+        />
+        <div class="validation" *ngIf="apiKey.touched || apiKey.dirty">
+          <p
+            class="validation__message validation--alert"
+            *ngIf="apiKey.hasError('required') && !apiKey.hasError('required')"
+          >
+            *Campo obrigatório: API key
+          </p>
+          <p
+            class="validation__message validation--alert"
+            *ngIf="apiKey.hasError('notAuthorized')"
+          >
+            Acesso não autorizado.
+          </p>
+        </div>
+      </div>
+      <button
+        class="primary-button button--large button--caps button"
+        type="submit"
+        [disabled]="!loginForm.valid"
+      >
+        Entrar
+      </button>
+    </div>
+    <div class="lg-form__row">
+      <p class="lg-form__text">Não possui uma API key?</p>
+      <button class="secondary-button button--large button" type="button">
+        Criar API key
+      </button>
+    </div>
+  </form>
+</div>
