@@ -187,15 +187,16 @@ fieldset {
   }
 }
 
-// Validations
+// Feedbacks
 
-.validation {
-  &__message {
-    @include fontSize(12px);
-    font-weight: $bold;
-    letter-spacing: calculateRem(1px);
-    margin: 0;
-  }
+.feedback {
+  @include fontSize(12px);
+  display: flex;
+  align-items: center;
+  font-weight: $bold;
+  letter-spacing: calculateRem(1px);
+  line-height: calculateRem(20px);
+  margin: 0;
 
   &--alert {
     color: $error-text;

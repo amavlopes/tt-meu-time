@@ -3,8 +3,16 @@ import {
   AbstractControl,
   FormBuilder,
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
+import { finalize, first } from 'rxjs';
+
+import { AuthService } from '@app/core/services/auth.service';
+
+type LoginForm = {
+  apiKey: FormControl<string | null>;
+};
 
 @Component({
   selector: 'tt-login',
@@ -12,25 +20,43 @@ import {
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  loginForm = this.fb.group(
-    {
-      apiKey: ['', Validators.required],
-    },
-    { udpateOn: 'blur' }
-  );
+  public errorMessage = '';
+  public pending = false;
 
-  constructor(private fb: FormBuilder) {}
+  loginForm: FormGroup<LoginForm> = this.fb.group({
+    apiKey: ['', Validators.required],
+  });
 
-  get apiKey(): AbstractControl {
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
+
+  get apiKey() {
     return this.loginForm.get('apiKey') as FormControl;
+  }
+
+  onInput() {
+    if (!!this.errorMessage) this.errorMessage = '';
   }
 
   onSubmit() {
     if (!this.loginForm.valid) return;
-    const apiKey = this.apiKey.value.trim();
-  }
 
-  resetForm() {
-    this.loginForm.reset();
+    const apiKey = this.apiKey.value.trim();
+    this.pending = true;
+    this.errorMessage = '';
+
+    this.auth
+      .login(apiKey)
+      .pipe(
+        first(),
+        finalize(() => (this.pending = false))
+      )
+      .subscribe({
+        next: () => {
+          console.log('Go to teams module');
+        },
+        error: (err: Error) => {
+          this.errorMessage = err.message;
+        },
+      });
   }
 }

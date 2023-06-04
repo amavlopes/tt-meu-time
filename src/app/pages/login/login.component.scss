@@ -17,15 +17,14 @@
 }
 
 .lg-form {
-  @include flexbox(calculateRem(15px));
+  @include flexbox(calculateRem(10px));
 
   &__row {
-    @include flexbox;
+    @include flexbox(calculateRem(10px));
   }
 
   &__control {
-    @include flexbox;
-    margin-bottom: calculateRem(5px);
+    @include flexbox(calculateRem(10px));
   }
 
   &__text {
@@ -33,6 +32,12 @@
     margin: 0;
   }
 
+}
+
+.loader {
+    display: inline-block;
+    width: calculateRem(20px);
+    height: calculateRem(20px);
 }
 
 @include mobile($min-mobile) {
