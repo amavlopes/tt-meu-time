@@ -1,27 +1,21 @@
 @import "./variables";
 @import "./mixins";
 
-* {
-    color: $secondary-text;
-    font-weight: $normal;
-    font-size: $font-size-base;
-    line-height: $line-height;
-    font-family: $primary-font;
-    box-sizing: border-box;
-
-    &:focus-visible {
-      outline: 0 none;
-    }
-}
 
 html,
 body {
     height: 100%;
 }
 
+html {
+  font: $normal #{$font-size-base}/#{$line-height} $primary-font;
+  box-sizing: border-box;
+}
+
 body {
   background: $bg-color url('/assets/bg-patterns.jpg') no-repeat 0 0;
   background-size: cover;
+  color: $secondary-text;
   align-items: center;
   justify-content: center;
   margin: 0;
@@ -32,4 +26,14 @@ body {
 p {
   @include fontSize($size-normal);
   margin: 0 0 calculateRem($size-normal);
+}
+
+a {
+  color: $primary-hover-color;
+  text-decoration: none;
+
+  @include allLinksStates {
+    color: $primary-hover-color;
+    text-decoration: underline;
+  }
 }

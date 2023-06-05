@@ -61,6 +61,27 @@
   }
 }
 
+@mixin visited() {
+  &:visited {
+    @content;
+  }
+}
+
+@mixin allLinksStates() {
+  @include hover {
+    @content;
+  }
+  @include active {
+    @content;
+  }
+  @include focus {
+    @content;
+  }
+  @include visited {
+
+  }
+}
+
 // Layouts
 
 @mixin flexbox($gap: $gap, $direction: 'column'){
