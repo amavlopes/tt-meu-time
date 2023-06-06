@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -8,7 +7,7 @@ import {
 } from '@angular/forms';
 import { finalize, first } from 'rxjs';
 
-import { AuthService } from '@app/core/services/auth.service';
+import { AuthService } from '@core/services/auth.service';
 
 type LoginForm = {
   apiKey: FormControl<string | null>;
