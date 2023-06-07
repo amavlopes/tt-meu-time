@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { finalize, first } from 'rxjs';
+import { Subscription, finalize, first } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
 
@@ -18,9 +18,11 @@ type LoginForm = {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  public errorMessage = '';
-  public pending = false;
+export class LoginComponent implements OnDestroy{
+
+  subscription!: Subscription;
+  errorMessage = '';
+  pending = false;
 
   loginForm: FormGroup<LoginForm> = this.fb.group({
     apiKey: ['', Validators.required],
@@ -43,7 +45,7 @@ export class LoginComponent {
     this.pending = true;
     this.errorMessage = '';
 
-    this.auth
+    const loginSubscription =this.auth
       .login(apiKey)
       .pipe(
         first(),
@@ -57,5 +59,12 @@ export class LoginComponent {
           this.errorMessage = err.message;
         },
       });
+      this.subscription.add(loginSubscription);
+
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
