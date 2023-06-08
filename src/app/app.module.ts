@@ -8,12 +8,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { httpInterceptorProviders } from '@core/helpers/interceptors';
+import { TeamComponent } from './pages/team/team.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TeamComponent
   ],
   imports: [
     BrowserModule,
