@@ -31,6 +31,10 @@ export class AuthService {
     return this.user.value;
   }
 
+  isLoggedIn(): boolean {
+    return this.userValue !== null ? true : false;
+  }
+
   login(token: string): Observable<User | never> {
     token = token.trim();
     return this.http
