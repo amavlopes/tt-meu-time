@@ -107,14 +107,12 @@
   }
 }
 
-@mixin padding($pxHorizontalPadding, $pxVerticalPadding: 0) {
+@mixin padding($paddings...) {
   $fontSize: $font-size-base;
-  $result: 0;
+  $result: ();
 
-  @if $pxVerticalPadding == 0 {
-    $result: #{calc($pxHorizontalPadding/$fontSize)}rem;
-  } @else {
-    $result: #{calc($pxHorizontalPadding/$fontSize)}rem #{calc($pxVerticalPadding/calc($fontSize))}rem;
+  @each $padding in $paddings {
+    $result: append($result , calculateRem($padding) , $separator: auto)
   }
 
   padding: $result;

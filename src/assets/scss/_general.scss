@@ -13,14 +13,11 @@ html {
 }
 
 body {
-  background: $bg-color url('/assets/bg-patterns.jpg') no-repeat 0 0;
+  background: $bg-color url('/assets/images/bg-patterns.jpg') no-repeat 0 0;
   background-size: cover;
   color: $secondary-text;
-  align-items: center;
-  justify-content: center;
   margin: 0;
   padding: 0;
-  @include flexbox(0, 'row');
 }
 
 p {
@@ -36,4 +33,10 @@ a {
     color: $primary-hover-color;
     text-decoration: underline;
   }
+}
+
+img {
+  border: 0;
+  display: inline-block;
+  margin-bottom: 0;
 }
