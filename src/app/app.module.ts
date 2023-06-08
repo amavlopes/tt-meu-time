@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from '@pages/login/login.component';
 import { httpInterceptorProviders } from '@core/helpers/interceptors';
 import { TeamComponent } from './pages/team/team.component';
+import { HeaderComponent } from './core/components/header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TeamComponent
+    TeamComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

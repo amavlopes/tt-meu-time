@@ -7,7 +7,6 @@ import {
   BehaviorSubject,
   Observable,
   map,
-  retry,
 } from 'rxjs';
 
 import { environment } from '@env/environment.development';

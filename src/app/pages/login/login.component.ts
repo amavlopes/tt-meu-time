@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -18,6 +18,7 @@ type LoginForm = {
   selector: 'tt-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnDestroy{
 
@@ -29,7 +30,7 @@ export class LoginComponent implements OnDestroy{
     apiKey: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private changeDetection: ChangeDetectorRef) {
     if (this.auth.isLoggedIn()) this.router.navigate(['/team']);
   }
 
@@ -55,7 +56,10 @@ export class LoginComponent implements OnDestroy{
       .login(apiKey)
       .pipe(
         first(),
-        finalize(() => (this.pending = false))
+        finalize(()=> {
+          this.pending = false;
+          this.changeDetection.detectChanges();
+        })
       )
       .subscribe({
         next: () => {
