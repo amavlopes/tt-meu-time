@@ -1,96 +1,105 @@
-<div class="lg-container">
-  <div class="group">
-    <h1 class="group__h1">Bem vindo(a),</h1>
-    <h2 class="group__h2">
-      saiba tudo sobre as ligas e copas ao redor do mundo.
-    </h2>
-  </div>
-  <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <div class="lg-form__row">
-      <div class="lg-form__control">
-        <label class="lg-form__label label--large">Digite sua API key</label>
-        <input
-          class="input--large input--primary input"
-          type="text"
-          placeholder="xXxXxXxXxXxXxXxXxX"
-          formControlName="apiKey"
-          (input)="onInput()"
-        />
-        <p
-          class="feedback feedback--alert"
-          *ngIf="
-            (apiKey.touched || apiKey.dirty) && apiKey.hasError('required')
-          "
-        >
-          *Campo obrigatório: API key
-        </p>
-        <p class="feedback" *ngIf="pending">
-          <svg
-            class="loader"
-            version="1.1"
-            id="L5"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            viewBox="0 0 100 100"
-            enable-background="new 0 0 0 0"
-            xml:space="preserve"
-          >
-            <circle fill="#325194" stroke="none" cx="6" cy="50" r="6">
-              <animateTransform
-                attributeName="transform"
-                dur="1s"
-                type="translate"
-                values="0 15 ; 0 -15; 0 15"
-                repeatCount="indefinite"
-                begin="0.1"
-              />
-            </circle>
-            <circle fill="#325194" stroke="none" cx="30" cy="50" r="6">
-              <animateTransform
-                attributeName="transform"
-                dur="1s"
-                type="translate"
-                values="0 10 ; 0 -10; 0 10"
-                repeatCount="indefinite"
-                begin="0.2"
-              />
-            </circle>
-            <circle fill="#325194" stroke="none" cx="54" cy="50" r="6">
-              <animateTransform
-                attributeName="transform"
-                dur="1s"
-                type="translate"
-                values="0 5 ; 0 -5; 0 5"
-                repeatCount="indefinite"
-                begin="0.3"
-              />
-            </circle>
-          </svg>
-          Aguarde
-        </p>
-        <p class="feedback feedback--alert" *ngIf="!!errorMessage">
-          {{ errorMessage }}
-        </p>
+<div class="wrapper">
+
+  <main>
+    <div class="container">
+
+      <div class="group">
+        <h1 class="group__h1">Bem vindo(a),</h1>
+        <h2 class="group__h2">
+          saiba tudo sobre as ligas e copas ao redor do mundo.
+        </h2>
       </div>
-      <button
-        class="primary-button button--large button--caps button"
-        type="submit"
-        [disabled]="!loginForm.valid || pending"
-      >
-        Entrar
-      </button>
+
+      <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="lg-form__row">
+          <div class="lg-form__control">
+            <label class="lg-form__label label--large">Digite sua API key</label>
+            <input
+              class="input--large input--primary input"
+              type="text"
+              placeholder="xXxXxXxXxXxXxXxXxX"
+              formControlName="apiKey"
+              (input)="onInput()"
+            />
+            <p
+              class="feedback feedback--alert"
+              *ngIf="
+                (apiKey.touched || apiKey.dirty) && apiKey.hasError('required')
+              "
+            >
+              *Campo obrigatório: API key
+            </p>
+            <p class="feedback" *ngIf="pending">
+              <svg
+                class="loader"
+                version="1.1"
+                id="L5"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                x="0px"
+                y="0px"
+                viewBox="0 0 100 100"
+                enable-background="new 0 0 0 0"
+                xml:space="preserve"
+              >
+                <circle fill="#325194" stroke="none" cx="6" cy="50" r="6">
+                  <animateTransform
+                    attributeName="transform"
+                    dur="1s"
+                    type="translate"
+                    values="0 15 ; 0 -15; 0 15"
+                    repeatCount="indefinite"
+                    begin="0.1"
+                  />
+                </circle>
+                <circle fill="#325194" stroke="none" cx="30" cy="50" r="6">
+                  <animateTransform
+                    attributeName="transform"
+                    dur="1s"
+                    type="translate"
+                    values="0 10 ; 0 -10; 0 10"
+                    repeatCount="indefinite"
+                    begin="0.2"
+                  />
+                </circle>
+                <circle fill="#325194" stroke="none" cx="54" cy="50" r="6">
+                  <animateTransform
+                    attributeName="transform"
+                    dur="1s"
+                    type="translate"
+                    values="0 5 ; 0 -5; 0 5"
+                    repeatCount="indefinite"
+                    begin="0.3"
+                  />
+                </circle>
+              </svg>
+              Aguarde
+            </p>
+            <p class="feedback feedback--alert" *ngIf="!!errorMessage">
+              {{ errorMessage }}
+            </p>
+          </div>
+          <button
+            class="primary-button button--large button--caps button"
+            type="submit"
+            [disabled]="!loginForm.valid || pending"
+          >
+            Entrar
+          </button>
+        </div>
+        <div class="lg-form__row">
+          <p class="lg-form__text">
+            Não possui uma API key?
+            <a
+              href="https://www.api-football.com/documentation-v3#section/Authentication"
+              target="_blank"
+              >Criar API key</a
+            >
+          </p>
+        </div>
+      </form>
+
     </div>
-    <div class="lg-form__row">
-      <p class="lg-form__text">
-        Não possui uma API key?
-        <a
-          href="https://www.api-football.com/documentation-v3#section/Authentication"
-          target="_blank"
-          >Criar API key</a
-        >
-      </p>
-    </div>
-  </form>
+  </main>
+
 </div>
