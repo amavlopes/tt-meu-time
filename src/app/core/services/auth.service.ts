@@ -14,6 +14,7 @@ import { environment } from '@env/environment.development';
 import { AuthResponse } from '@core/interfaces/auth-response.interface';
 import { User } from '@core/models/user.model';
 import { Utils } from '@core/helpers/utils';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -22,7 +23,7 @@ export class AuthService {
   private user: BehaviorSubject<User | null>;
   public user$: Observable<User | null>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.user = new BehaviorSubject(Utils.getLocalStorageItem('user'));
     this.user$ = this.user.asObservable();
   }
@@ -62,5 +63,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('user');
     this.user.next(null);
+    this.router.navigate(['/login']);
   }
 }

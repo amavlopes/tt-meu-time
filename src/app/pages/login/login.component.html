@@ -77,7 +77,7 @@
       <button
         class="primary-button button--large button--caps button"
         type="submit"
-        [disabled]="!loginForm.valid"
+        [disabled]="!loginForm.valid || pending"
       >
         Entrar
       </button>

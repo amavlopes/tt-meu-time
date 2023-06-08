@@ -8,6 +8,7 @@ import {
 import { Subscription, finalize, first } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
+import { Router } from '@angular/router';
 
 type LoginForm = {
   apiKey: FormControl<string | null>;
@@ -20,7 +21,7 @@ type LoginForm = {
 })
 export class LoginComponent implements OnDestroy{
 
-  subscription!: Subscription;
+  subscription: Subscription = new Subscription();
   errorMessage = '';
   pending = false;
 
@@ -28,22 +29,27 @@ export class LoginComponent implements OnDestroy{
     apiKey: ['', Validators.required],
   });
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) {
+    if (this.auth.isLoggedIn()) this.router.navigate(['/team']);
+  }
 
   get apiKey() {
     return this.loginForm.get('apiKey') as FormControl;
   }
 
   onInput() {
-    if (!!this.errorMessage) this.errorMessage = '';
+    if (!!this.errorMessage) this.clearMessage();
   }
 
   onSubmit() {
+
+    this.clearMessage();
+
     if (!this.loginForm.valid) return;
 
-    const apiKey = this.apiKey.value.trim();
     this.pending = true;
-    this.errorMessage = '';
+
+    const apiKey = this.apiKey.value.trim();
 
     const loginSubscription =this.auth
       .login(apiKey)
@@ -53,14 +59,18 @@ export class LoginComponent implements OnDestroy{
       )
       .subscribe({
         next: () => {
-          console.log('Go to teams module');
+          this.router.navigate(['/team']);
         },
         error: (err: Error) => {
           this.errorMessage = err.message;
         },
       });
-      this.subscription.add(loginSubscription);
 
+      this.subscription.add(loginSubscription);
+  }
+
+  clearMessage() {
+    this.errorMessage = '';
   }
 
   ngOnDestroy(): void {

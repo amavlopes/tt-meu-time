@@ -6,7 +6,7 @@ import { TeamComponent } from '@pages/team/team.component';
 import { AuthGuard } from '@core/services/permissions.service';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch:'full' },
+  { path: '', redirectTo: 'team', pathMatch:'full' },
   { path: 'login', component: LoginComponent },
   { path: 'team', canActivate: [AuthGuard] , component: TeamComponent }
 ];
