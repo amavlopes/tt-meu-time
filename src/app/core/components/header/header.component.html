@@ -5,12 +5,9 @@
       title="Logomarca Meu Time"
       alt="Logomarca Meu Time"
     />
-    <h3 class="header__h">Meu Time</h3>
+    <h4 class="header__h">Meu Time</h4>
   </a>
-  <tt-button
-    ttSecondary
-    ttSmall
-    [label]="'Sair'"
-    (click)="logout()"
-  ></tt-button>
+  <a class="header__a header__a--logout" (click)="logout()">
+    Sair<tt-icon [icon]="'fa-arrow-right-from-bracket'"></tt-icon>
+  </a>
 </header>

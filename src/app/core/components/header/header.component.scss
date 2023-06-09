@@ -1,7 +1,7 @@
 @import "/src/assets/scss/mixins";
 
 .header {
-  background-color: $primary-color;
+  background-color: $primary-hover-color;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,8 +18,18 @@
       }
     }
 
+    &--logout {
+      color: $primary-white;
+      @include fontSize($size-small);
+      @include padding(0px, 10px);
+      letter-spacing: calculateRem(2px);
+      @include hover {
+        text-decoration: underline;
+      }
+    }
+
     img {
-      width: calculateRem(100px);
+      width: calculateRem(80px);
     }
   }
 

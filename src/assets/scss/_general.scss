@@ -25,6 +25,8 @@ p {
 
 a {
   color: $primary-hover-color;
+  cursor: pointer;
+  @include fontSize($size-normal);
   text-decoration: none;
 
   @include allLinksStates {

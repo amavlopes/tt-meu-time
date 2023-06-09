@@ -1,6 +1,10 @@
 @import "src/assets/scss/variables";
 @import "src/assets/scss/mixins";
 
+:host {
+  display: flex;
+}
+
 .button {
   @include reset;
   @include transitions(background-color, border-color, color);
@@ -12,6 +16,7 @@
   cursor: pointer;
   display: flex;
   gap: calculateRem(5px);
+  justify-content: center;
   letter-spacing: calculateRem(1.5px);
   text-align: center;
   @include focus {
@@ -37,14 +42,14 @@
   }
 
   &.full {
-    width: 100%;
+    flex-grow: 1;
   }
 
   &.primary {
     background-color: $primary-color;
 
     &[disabled] {
-      @include HexToRgba('backhround-color', $primary-color, .5);
+      @include HexToRgba('background-color', $primary-color, .5);
     }
 
     @include not([disabled]) {
@@ -63,23 +68,19 @@
     }
 
     @include button-outlined {
+      color: $primary-color;
+      border-color: $primary-color;
+      @include HexToRgba('background-color', $primary-color, 0);
+
+      &[disabled] {
+        @include HexToRgba('color', $primary-color, .8);
+        @include HexToRgba('border-color', $primary-color, .5);
+      }
+
       @include not([disabled]) {
-        border-color: $primary-color;
-        color: $primary-color;
-
-        @include hover {
-          border-color: $primary-hover-color;
-          color: $primary-hover-color;
-        }
-
-        @include focus {
-          border-color: $primary-focus-color;
-          color: $primary-focus-color;
-        }
-
-        @include active {
-          border-color: $primary-active-color;
-          color: $primary-active-color;
+        @include allLinksStates {
+          color: $primary-white;
+          @include HexToRgba('background-color', $primary-color, 1);
         }
       }
     }
@@ -108,23 +109,19 @@
     }
 
     @include button-outlined {
+      border-color: $secondary-color;
+      color: $secondary-color;
+      @include HexToRgba('background-color', $secondary-color, 0);
+
+      &[disabled] {
+        @include HexToRgba('color', $secondary-color, .8);
+        @include HexToRgba('border-color', $secondary-color, .5);
+      }
+
       @include not([disabled]) {
-        border-color: $secondary-color;
-        color: $secondary-color;
-
-        @include hover {
-          border-color: $secondary-hover-color;
-          color: $secondary-hover-color;
-        }
-
-        @include focus {
-          border-color: $secondary-focus-color;
-          color: $secondary-focus-color;
-        }
-
-        @include active {
-          border-color: $secondary-active-color;
-          color: $secondary-active-color;
+        @include allLinksStates {
+          color: $primary-white;
+          @include HexToRgba('background-color', $secondary-color, 1);
         }
       }
     }
@@ -139,21 +136,24 @@
 
     @include not([disabled]) {
       @include allLinksStates {
-        @include HexToRgba('background-color', $secondary-brand-color, 1);
+        @include HexToRgba('background-color', $primary-brand-color, 1);
       }
     }
 
     @include button-outlined {
-      border-color: $secondary-brand-color;
-      @include HexToRgba('background-color', $secondary-brand-color, 0);
+      color: $primary-brand-color;
+      border-color: $primary-brand-color;
+      @include HexToRgba('background-color', $primary-brand-color, 0);
 
       &[disabled] {
-        @include HexToRgba('border-color', $secondary-brand-color, .5);
+        @include HexToRgba('color', $primary-brand-color, .8);
+        @include HexToRgba('border-color', $primary-brand-color, .5);
       }
 
       @include not([disabled]) {
         @include allLinksStates {
-          @include HexToRgba('background-color', $secondary-brand-color, 1);
+          color: $primary-white;
+          @include HexToRgba('background-color', $primary-brand-color, 1);
         }
       }
     }
