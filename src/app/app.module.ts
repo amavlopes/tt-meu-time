@@ -17,6 +17,9 @@ import { LargeDirective } from './shared/directives/large.directive';
 import { FullWidthDirective } from './shared/directives/full-width.directive';
 import { CapsDirective } from './shared/directives/caps.directive';
 import { SmallDirective } from './shared/directives/small.directive';
+import { TertiaryDirective } from './shared/directives/tertiary.directive';
+import { OutlinedDirective } from './shared/directives/outlined.directive';
+import { IconComponent } from './shared/components/icon/icon.component';
 
 
 @NgModule({
@@ -31,7 +34,10 @@ import { SmallDirective } from './shared/directives/small.directive';
     LargeDirective,
     FullWidthDirective,
     CapsDirective,
-    SmallDirective
+    SmallDirective,
+    TertiaryDirective,
+    OutlinedDirective,
+    IconComponent
   ],
   imports: [
     BrowserModule,

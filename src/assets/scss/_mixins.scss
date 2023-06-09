@@ -2,9 +2,9 @@
 
 // Generals
 
-@mixin HexToRgba($color, $opacity: 0.3) {
-  background: $color;
-  background: rgba($color, $opacity);
+@mixin HexToRgba($prop, $color, $opacity: 0.3) {
+  #{$prop}: $color;
+  #{$prop}: rgba($color, $opacity);
 }
 
 @function calculateRem($size) {

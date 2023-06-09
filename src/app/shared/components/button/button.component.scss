@@ -10,6 +10,8 @@
   box-sizing: border-box;
   color: $primary-white;
   cursor: pointer;
+  display: flex;
+  gap: calculateRem(5px);
   letter-spacing: calculateRem(1.5px);
   text-align: center;
   @include focus {
@@ -42,7 +44,7 @@
     background-color: $primary-color;
 
     &[disabled] {
-      @include HexToRgba($primary-color, .5);
+      @include HexToRgba('backhround-color', $primary-color, .5);
     }
 
     @include not([disabled]) {
@@ -87,7 +89,7 @@
     background-color: $secondary-color;
 
     &[disabled] {
-      @include HexToRgba($secondary-color, .5);
+      @include HexToRgba('background-color', $secondary-color, .5);
     }
 
     @include not([disabled]) {
@@ -132,12 +134,27 @@
     background-color: $primary-brand-color;
 
     &[disabled] {
-      @include HexToRgba($primary-brand-color, .5);
+      @include HexToRgba('background-color', $primary-brand-color, .5);
     }
 
     @include not([disabled]) {
       @include allLinksStates {
-        background-color: $secondary-brand-color;
+        @include HexToRgba('background-color', $secondary-brand-color, 1);
+      }
+    }
+
+    @include button-outlined {
+      border-color: $secondary-brand-color;
+      @include HexToRgba('background-color', $secondary-brand-color, 0);
+
+      &[disabled] {
+        @include HexToRgba('border-color', $secondary-brand-color, .5);
+      }
+
+      @include not([disabled]) {
+        @include allLinksStates {
+          @include HexToRgba('background-color', $secondary-brand-color, 1);
+        }
       }
     }
 
