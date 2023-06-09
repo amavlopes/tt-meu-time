@@ -98,7 +98,7 @@
 }
 
 @mixin button-outlined {
-  &--outlined {
+  &.outlined {
     background-color: transparent;
     line-height: calculateRem($size-small);
     @include fontSize($size-small);

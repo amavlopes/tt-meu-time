@@ -1,15 +1,18 @@
 @import "./variables";
 @import "./mixins";
 
-
 html,
 body {
     height: 100%;
+
+    *
+    {
+      box-sizing: border-box;
+    }
 }
 
 html {
   font: $normal #{$font-size-base}/#{$line-height} $primary-font;
-  box-sizing: border-box;
 }
 
 body {

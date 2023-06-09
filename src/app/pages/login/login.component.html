@@ -1,8 +1,6 @@
 <div class="wrapper">
-
   <main>
     <div class="container">
-
       <div class="group">
         <h1 class="group__h1">Bem vindo(a),</h1>
         <h2 class="group__h2">
@@ -13,7 +11,9 @@
       <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="lg-form__row">
           <div class="lg-form__control">
-            <label class="lg-form__label label--large">Digite sua API key</label>
+            <label class="lg-form__label label--large"
+              >Digite sua API key</label
+            >
             <input
               class="input--large input--primary input"
               type="text"
@@ -79,13 +79,10 @@
               {{ errorMessage }}
             </p>
           </div>
-          <button
-            class="primary-button button--large button--caps button"
-            type="submit"
+          <tt-button
+            [label]="'Entrar'"
             [disabled]="!loginForm.valid || pending"
-          >
-            Entrar
-          </button>
+          ></tt-button>
         </div>
         <div class="lg-form__row">
           <p class="lg-form__text">
@@ -98,8 +95,6 @@
           </p>
         </div>
       </form>
-
     </div>
   </main>
-
 </div>
