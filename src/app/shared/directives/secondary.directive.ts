@@ -8,8 +8,10 @@ export class SecondaryDirective implements AfterViewInit {
   constructor(private hostElement: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    let child = this.hostElement.nativeElement.children[0];
-    this.renderer.addClass(child, 'secondary');
+    let children = this.hostElement.nativeElement.querySelectorAll('input, button');
+    children.forEach((element: HTMLElement) => {
+      this.renderer.addClass(element, 'secondary')
+    });
   }
 
 }

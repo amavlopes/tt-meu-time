@@ -8,8 +8,10 @@ export class SmallDirective implements AfterViewInit {
   constructor(private hostElement: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    let child = this.hostElement.nativeElement.children[0];
-    this.renderer.addClass(child, 'small');
+    let children = this.hostElement.nativeElement.querySelectorAll('label, input, button');
+    children.forEach((element: HTMLElement) => {
+      this.renderer.addClass(element, 'small')
+    });
   }
 
 }
