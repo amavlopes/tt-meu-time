@@ -9,7 +9,6 @@ import { Subscription, finalize, first } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
 import { Router } from '@angular/router';
-import { Validation } from '@app/shared/types/types';
 
 type LoginForm = {
   apiKey: FormControl<string | null>;
@@ -31,23 +30,8 @@ export class LoginComponent implements OnDestroy{
     apiKey: ['', Validators.required],
   });
 
-  validations!: Array<Validation>;
-
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private changeDetection: ChangeDetectorRef) {
     if (this.auth.isLoggedIn()) this.router.navigate(['/team']);
-  }
-
-  ngOnInit() {
-    const apiKeyInputValidations = [{
-      message: '*Campo obrigatório: API key',
-      type: 'alert' as const,
-      condition: (this.apiKey.touched || this.apiKey.dirty) && this.apiKey.hasError('required')
-    }, {
-      message: this.errorMessage,
-      type: 'alert' as const,
-      condition: !!this.errorMessage
-    }];
-    this.validations = apiKeyInputValidations;
   }
 
   get apiKey() {

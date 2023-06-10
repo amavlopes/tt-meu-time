@@ -37,7 +37,6 @@
     font-size: calculateRem($size-small);
     margin: 0;
   }
-
 }
 
 @include mobile($min-mobile) {

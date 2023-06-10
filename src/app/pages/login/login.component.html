@@ -1,7 +1,6 @@
 <div class="wrapper">
   <main>
     <div class="container">
-
       <div class="group">
         <h1 class="group__h1">Bem vindo(a),</h1>
         <h2 class="group__h2">
@@ -11,17 +10,46 @@
 
       <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form__row">
-          <tt-input ttLarge label="Digite sua API key" [validations]="validations"></tt-input>
+          <tt-input
+            ttLarge
+            label="Digite sua API key"
+            formControlName="apiKey"
+            (input)="onInput()"
+          ></tt-input>
+          <tt-validation
+            *ngIf="
+              (this.apiKey.touched || this.apiKey.dirty) &&
+              this.apiKey.hasError('required')
+            "
+            [message]="'*Campo obrigatório: API key'"
+            [type]="'alert'"
+          ></tt-validation>
+          <tt-validation
+            *ngIf="!!this.errorMessage"
+            [message]="this.errorMessage"
+            [type]="'alert'"
+          ></tt-validation>
           <tt-loader *ngIf="pending" message="Aguarde"></tt-loader>
-          <tt-button ttPrimary ttLarge ttFullWidth [label]="'Entrar'" [disabled]="!loginForm.valid || pending"></tt-button>
+          <tt-button
+            ttPrimary
+            ttLarge
+            ttFullWidth
+            [label]="'Entrar'"
+            [disabled]="!loginForm.valid || pending"
+          ></tt-button>
         </div>
+
         <div class="form__row">
-          <p>Não possui uma API key?
-            <a href="https://www.api-football.com/documentation-v3#section/Authentication" target="_blank">Criar API key</a>
+          <p>
+            Não possui uma API key?
+            <a
+              href="https://www.api-football.com/documentation-v3#section/Authentication"
+              target="_blank"
+              >Criar API key</a
+            >
           </p>
         </div>
       </form>
-
     </div>
   </main>
 </div>
