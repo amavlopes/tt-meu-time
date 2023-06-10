@@ -2,7 +2,6 @@
 @import "/src/assets/scss/mixins";
 
 .label {
-  font-weight: $light;
 
   &.large {
     font-size: calculateRem($label-large);

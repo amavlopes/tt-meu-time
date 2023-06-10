@@ -1,0 +1,16 @@
+@import "/src/assets/scss/variables";
+@import "/src/assets/scss/mixins";
+
+.validation {
+  @include fontSize(12px);
+  display: flex;
+  align-items: center;
+  font-weight: $bold;
+  letter-spacing: calculateRem(1px);
+  line-height: calculateRem(20px);
+  margin: 0;
+
+  &.alert {
+    color: $error-text;
+  }
+}

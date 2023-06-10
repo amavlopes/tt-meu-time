@@ -22,6 +22,7 @@ import { OutlinedDirective } from './shared/directives/outlined.directive';
 import { IconComponent } from './shared/components/icon/icon.component';
 import { LabelComponent } from './shared/components/label/label.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { ValidationComponent } from './shared/components/validation/validation.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     OutlinedDirective,
     IconComponent,
     LabelComponent,
-    LoaderComponent
+    LoaderComponent,
+    ValidationComponent
   ],
   imports: [
     BrowserModule,

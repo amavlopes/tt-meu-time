@@ -9,11 +9,10 @@
         </h2>
       </div>
 
-      <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="lg-form__row">
-          <div class="lg-form__control">
+      <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form__row">
+          <div class="form__control">
             <tt-label ttLarge message="Digite sua API key"></tt-label>
-            <tt-loader *ngIf="pending" message="Aguarde"></tt-loader>
             <input
               class="input--large input--primary input"
               type="text"
@@ -21,34 +20,15 @@
               formControlName="apiKey"
               (input)="onInput()"
             />
-            <p
-              class="feedback feedback--alert"
-              *ngIf="
-                (apiKey.touched || apiKey.dirty) && apiKey.hasError('required')
-              "
-            >
-              *Campo obrigatório: API key
-            </p>
-            <p class="feedback feedback--alert" *ngIf="!!errorMessage">
-              {{ errorMessage }}
-            </p>
+            <tt-loader *ngIf="pending" message="Aguarde"></tt-loader>
+            <tt-validation *ngIf="(apiKey.touched || apiKey.dirty) && apiKey.hasError('required')" message="*Campo obrigatório: API key" type="alert"></tt-validation>
+            <tt-validation *ngIf="!!errorMessage" [message]="errorMessage" type="alert"></tt-validation>
           </div>
-          <tt-button
-            ttPrimary
-            ttLarge
-            ttFullWidth
-            [label]="'Entrar'"
-            [disabled]="!loginForm.valid || pending"
-          ></tt-button>
+          <tt-button ttPrimary ttLarge ttFullWidth [label]="'Entrar'" [disabled]="!loginForm.valid || pending"></tt-button>
         </div>
-        <div class="lg-form__row">
-          <p class="lg-form__text">
-            Não possui uma API key?
-            <a
-              href="https://www.api-football.com/documentation-v3#section/Authentication"
-              target="_blank"
-              >Criar API key</a
-            >
+        <div class="form__row">
+          <p>Não possui uma API key?
+            <a href="https://www.api-football.com/documentation-v3#section/Authentication" target="_blank">Criar API key</a>
           </p>
         </div>
       </form>
