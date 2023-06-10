@@ -21,6 +21,7 @@ import { TertiaryDirective } from './shared/directives/tertiary.directive';
 import { OutlinedDirective } from './shared/directives/outlined.directive';
 import { IconComponent } from './shared/components/icon/icon.component';
 import { LabelComponent } from './shared/components/label/label.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { LabelComponent } from './shared/components/label/label.component';
     TertiaryDirective,
     OutlinedDirective,
     IconComponent,
-    LabelComponent
+    LabelComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
