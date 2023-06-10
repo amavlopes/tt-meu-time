@@ -11,19 +11,8 @@
 
       <form class="form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form__row">
-          <div class="form__control">
-            <tt-label ttLarge message="Digite sua API key"></tt-label>
-            <input
-              class="input--large input--primary input"
-              type="text"
-              placeholder="xXxXxXxXxXxXxXxXxX"
-              formControlName="apiKey"
-              (input)="onInput()"
-            />
-            <tt-loader *ngIf="pending" message="Aguarde"></tt-loader>
-            <tt-validation *ngIf="(apiKey.touched || apiKey.dirty) && apiKey.hasError('required')" message="*Campo obrigatório: API key" type="alert"></tt-validation>
-            <tt-validation *ngIf="!!errorMessage" [message]="errorMessage" type="alert"></tt-validation>
-          </div>
+          <tt-input ttLarge label="Digite sua API key" [validations]="validations"></tt-input>
+          <tt-loader *ngIf="pending" message="Aguarde"></tt-loader>
           <tt-button ttPrimary ttLarge ttFullWidth [label]="'Entrar'" [disabled]="!loginForm.valid || pending"></tt-button>
         </div>
         <div class="form__row">

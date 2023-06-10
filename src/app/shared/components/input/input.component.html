@@ -1,0 +1,11 @@
+<div class="control">
+  <tt-label ttLarge [message]="label"></tt-label>
+  <input
+    type="text"
+    placeholder="xXxXxXxXxXxXxXxXxX"
+    (input)="onInput()"
+  />
+  <ng-container *ngFor="let validation of validations">
+    <tt-validation *ngIf="validation.condition" [message]="validation.message" [type]="validation.type"></tt-validation>
+  </ng-container>
+</div>

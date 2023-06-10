@@ -23,6 +23,7 @@ import { IconComponent } from './shared/components/icon/icon.component';
 import { LabelComponent } from './shared/components/label/label.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ValidationComponent } from './shared/components/validation/validation.component';
+import { InputComponent } from './shared/components/input/input.component';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ValidationComponent } from './shared/components/validation/validation.c
     IconComponent,
     LabelComponent,
     LoaderComponent,
-    ValidationComponent
+    ValidationComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,

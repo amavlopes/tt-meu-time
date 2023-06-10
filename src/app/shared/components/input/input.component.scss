@@ -1,0 +1,52 @@
+@import "/src/assets/scss/variables";
+@import "/src/assets/scss/mixins";
+
+.control {
+  @include flexbox(calculateRem(10px));
+}
+
+input {
+  @include reset;
+  border-radius: $size-radius;
+  border: solid calculateRem($size-border-large) $border-color;
+  font-size: $input-normal;
+  @include transitions(border-color);
+
+  &.large {
+    padding: calculateRem($input-large-padding);
+  }
+
+  &.small {
+    border-width: calculateRem($size-border-small);
+    padding: calculateRem($input-small-padding);
+  }
+
+  @include focus {
+    outline: 0;
+  }
+
+  &::placeholder {
+    color: $quaternary-text;
+  }
+
+  &.primary {
+    @include focus {
+      border-color: $primary-focus-color;
+    }
+  }
+
+  &.secondary {
+    @include focus {
+      border-color: $secondary-focus-color;
+    }
+  }
+
+}
+
+@include mobile($min-mobile) {
+  input {
+    &.large {
+      padding: calculateRem($input-small-padding);
+    }
+  }
+}

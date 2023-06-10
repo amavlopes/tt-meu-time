@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Validation, ValidationType } from '@app/shared/types/types';
 
 @Component({
   selector: 'tt-validation',
@@ -8,6 +9,6 @@ import { Component, Input } from '@angular/core';
 export class ValidationComponent {
 
   @Input() message!: string;
-  @Input() type!: 'alert' | 'success' | 'warning';
+  @Input() type!: ValidationType;
 
 }
