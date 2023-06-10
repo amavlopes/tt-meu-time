@@ -48,18 +48,6 @@ fieldset {
 
 }
 
-.label {
-  font-weight: $light;
-
-  &--large {
-    font-size: calculateRem($label-large);
-  }
-
-  &--small {
-    font-size: calculateRem($label-small);
-  }
-}
-
 // Feedbacks
 
 .feedback {
@@ -79,16 +67,10 @@ fieldset {
 // @Media
 
 @include mobile($min-mobile) {
-
   .input {
     &--large {
       padding: calculateRem($input-small-padding);
     }
   }
 
-  .label {
-    &--large {
-      font-size: calculateRem($label-small);
-    }
-  }
 }

@@ -11,9 +11,7 @@
       <form class="lg-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="lg-form__row">
           <div class="lg-form__control">
-            <label class="lg-form__label label--large"
-              >Digite sua API key</label
-            >
+            <tt-label ttLarge message="Digite sua API key"></tt-label>
             <input
               class="input--large input--primary input"
               type="text"

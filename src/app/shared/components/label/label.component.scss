@@ -1,0 +1,22 @@
+@import "/src/assets/scss/variables";
+@import "/src/assets/scss/mixins";
+
+.label {
+  font-weight: $light;
+
+  &.large {
+    font-size: calculateRem($label-large);
+  }
+
+  &.small {
+    font-size: calculateRem($label-small);
+  }
+}
+
+@include mobile($min-mobile) {
+  .label {
+    &.large {
+      font-size: calculateRem($label-small);
+    }
+  }
+}

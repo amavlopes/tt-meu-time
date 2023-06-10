@@ -8,8 +8,10 @@ export class LargeDirective implements AfterViewInit {
   constructor(private hostElement: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    let child = this.hostElement.nativeElement.children[0];
-    this.renderer.addClass(child, 'large');
+    let children = this.hostElement.nativeElement.querySelectorAll('label, button, input');
+    children.forEach((element: HTMLElement) => {
+      this.renderer.addClass(element, 'large')
+    });
   }
 
 }

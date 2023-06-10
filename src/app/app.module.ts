@@ -20,6 +20,7 @@ import { SmallDirective } from './shared/directives/small.directive';
 import { TertiaryDirective } from './shared/directives/tertiary.directive';
 import { OutlinedDirective } from './shared/directives/outlined.directive';
 import { IconComponent } from './shared/components/icon/icon.component';
+import { LabelComponent } from './shared/components/label/label.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { IconComponent } from './shared/components/icon/icon.component';
     SmallDirective,
     TertiaryDirective,
     OutlinedDirective,
-    IconComponent
+    IconComponent,
+    LabelComponent
   ],
   imports: [
     BrowserModule,
