@@ -24,6 +24,7 @@ import { LabelComponent } from './shared/components/label/label.component';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ValidationComponent } from './shared/components/validation/validation.component';
 import { InputComponent } from './shared/components/input/input.component';
+import { SelectComponent } from './shared/components/select/select.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { InputComponent } from './shared/components/input/input.component';
     LabelComponent,
     LoaderComponent,
     ValidationComponent,
-    InputComponent
+    InputComponent,
+    SelectComponent
   ],
   imports: [
     BrowserModule,

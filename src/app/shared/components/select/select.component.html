@@ -1,0 +1,7 @@
+<div class="select-wrapper" *ngIf="!!items.length">
+  <i class="icon fa-sharp fa-regular fa-chevron-down"></i>
+  <select id="country" class="small full">
+    <option [ngValue]="defaultValue">Selecione</option>
+    <option *ngFor="let item of items" [ngValue]="item">{{ item.name }}</option>
+  </select>
+</div>
