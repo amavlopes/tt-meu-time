@@ -22,9 +22,9 @@ type LoginForm = {
 })
 export class LoginComponent implements OnDestroy{
 
-  subscription: Subscription = new Subscription();
   errorMessage = '';
   pending = false;
+  subscription: Subscription = new Subscription();
 
   loginForm: FormGroup<LoginForm> = this.fb.group({
     apiKey: ['', Validators.required],
@@ -52,7 +52,7 @@ export class LoginComponent implements OnDestroy{
 
     const apiKey = this.apiKey.value.trim();
 
-    const loginSubscription =this.auth
+    const loginSubscription = this.auth
       .login(apiKey)
       .pipe(
         first(),

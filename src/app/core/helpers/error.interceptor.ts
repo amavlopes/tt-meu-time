@@ -27,7 +27,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.catchHttpResponseErrorMissingKey(httpEvent);
         },
         error: (err) => {
-          if ([401, 403].includes(err.status) && this.auth.userValue) {
+          if ([499, 500].includes(err.status) && this.auth.userValue) {
             this.auth.logout();
           }
           console.log('[ERROR INTERCEPTOR]: ', err);
@@ -39,10 +39,12 @@ export class ErrorInterceptor implements HttpInterceptor {
   }
 
   private catchHttpResponseErrorMissingKey<T>(httpEvent: HttpEvent<T>) {
-    if (httpEvent instanceof HttpResponse<T>) {
+    if (httpEvent instanceof HttpResponse) {
       const { errors } = <AuthResponse>httpEvent.body;
       if (errors && errors.token) {
         throw new HttpError(1, errors.token);
+      } else if (errors && errors.bug) {
+        throw new HttpError(2, errors.bug);
       }
     }
   }

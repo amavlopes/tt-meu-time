@@ -1,11 +1,21 @@
+import { Country } from "@app/shared/types/types"
+
 export interface AuthResponse {
   get: string,
   parameters: [],
   errors: {
-    token: string
+    token: string,
+    bug?: string
   },
   results: number,
-  response: {
+  paging: {
+    current: number,
+    total: number
+  },
+  response: ResponseStatus | Array<Country>
+}
+
+export interface ResponseStatus {
     account: {
       firstname: string,
       lastname: string,
@@ -20,5 +30,4 @@ export interface AuthResponse {
       current: number;
       limit_day: number;
     }
-  }
 }

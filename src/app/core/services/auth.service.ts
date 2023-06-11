@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 
 import { environment } from '@env/environment.development';
-import { AuthResponse } from '@core/interfaces/auth-response.interface';
+import { AuthResponse, ResponseStatus } from '@core/interfaces/auth-response.interface';
 import { User } from '@core/models/user.model';
 import { Utils } from '@core/helpers/utils';
 import { Router } from '@angular/router';
@@ -46,7 +46,7 @@ export class AuthService {
       .pipe(
         map((stream: unknown) => {
           const { response } = stream as AuthResponse;
-          const user = { ...response.account, token };
+          const user = { ...(response as ResponseStatus).account, token };
           return this.authenticateUser(user);
         })
       );

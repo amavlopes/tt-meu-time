@@ -21,6 +21,7 @@ export class SelectComponent implements ControlValueAccessor {
   onTouched!: Function;
 
   @Input() id!: string;
+  @Input() label!: string;
   @Input() defaultValue: string | null = null;
   @Input() items!: Array<{name: string}>;
 
