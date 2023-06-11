@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Country } from '@app/shared/types/types';
@@ -8,7 +8,7 @@ import { Country } from '@app/shared/types/types';
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.scss'],
 })
-export class TeamComponent implements OnInit {
+export class TeamComponent {
 
   form!: FormGroup;
   defaultValue: string | null = null;
@@ -27,10 +27,6 @@ export class TeamComponent implements OnInit {
 
   get country(): FormControl {
     return this.form.get('country') as FormControl;
-  }
-
-  ngOnInit(): void {
-    // To Do: Create and Integrate CountryService
   }
 
 }

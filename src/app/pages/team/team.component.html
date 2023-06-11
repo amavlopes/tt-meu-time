@@ -12,8 +12,8 @@
 
           <div class="control">
             <tt-label ttLarge label="País" [for]="'country'"></tt-label>
-            <tt-select *ngIf="!!countries.length" [defaultValue]="defaultValue" [items]="countries" ></tt-select>
-            <tt-validation *ngIf="this.country.dirty && this.country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation>
+            <tt-select id="country" formControlName="country" [defaultValue]="defaultValue" [items]="countries"></tt-select>
+            <tt-validation *ngIf="country.dirty && country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation>
           </div>
 
         </div>
