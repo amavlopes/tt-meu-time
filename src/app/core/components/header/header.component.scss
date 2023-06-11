@@ -1,11 +1,8 @@
+@import "/src/assets/scss/variables";
 @import "/src/assets/scss/mixins";
 
 .header {
   background-color: $primary-hover-color;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem .5rem;
 
   &__a {
     display: flex;
@@ -38,4 +35,11 @@
       letter-spacing: calculateRem(3px);
   }
 
+}
+
+.container {
+  @extend %container;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

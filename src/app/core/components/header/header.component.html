@@ -1,13 +1,15 @@
 <header class="header">
-  <a class="header__a" routerLink="/team">
-    <img
-      [src]="'/assets/images/logo.png'"
-      title="Logomarca Meu Time"
-      alt="Logomarca Meu Time"
-    />
-    <h4 class="header__h">Meu Time</h4>
-  </a>
-  <a class="header__a header__a--logout" (click)="logout()">
-    Sair<tt-icon [icon]="'fa-arrow-right-from-bracket'"></tt-icon>
-  </a>
+  <div class="container">
+    <a class="header__a" routerLink="/team">
+      <img
+        [src]="'/assets/images/logo.png'"
+        title="Logomarca Meu Time"
+        alt="Logomarca Meu Time"
+      />
+      <h4 class="header__h">Meu Time</h4>
+    </a>
+    <a class="header__a header__a--logout" (click)="logout()">
+      Sair<tt-icon [icon]="'fa-arrow-right-from-bracket'"></tt-icon>
+    </a>
+  </div>
 </header>

@@ -132,6 +132,11 @@
   transition: $transition;
 }
 
+%container {
+  width: $container;
+  margin: 0 auto;
+}
+
 @mixin mobile($width) {
   @media only screen and (max-width: $width) {
     @content;
