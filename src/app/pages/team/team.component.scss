@@ -1,1 +1,100 @@
+@import "/src/assets/scss/variables";
 @import "/src/assets/scss/mixins";
+
+.wrapper {
+  display: grid;
+  row-gap: calculateRem(40px);
+}
+
+.container {
+  width: 959px;
+  margin: 0 auto;
+}
+
+.form {
+  @include flexbox(calculateRem(10px), 'row');
+  width: 100%;
+
+  &__row {
+    @include flexbox(calculateRem(10px));
+    flex-grow: 1;
+  }
+}
+
+.control {
+  @include flexbox(calculateRem(10px));
+}
+
+.select-wrapper {
+  align-items: center;
+  cursor: pointer;
+  display: grid;
+  grid-template-areas: "select";
+}
+
+.icon {
+  grid-area: select;
+  justify-self: end;
+  @include padding(15px, 20px);
+
+  &.small {
+    @include padding(15px, 20px);
+  }
+
+  &.large {
+    @include padding(40px, 20px);
+  }
+
+}
+
+select {
+  @include reset;
+  border-radius: $size-radius;
+  border: solid calculateRem($size-border-large) $border-color;
+  font-size: $input-normal;
+  grid-area: select;
+  @include transitions(border-color);
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  @include focus {
+    outline: 0;
+  }
+
+  &.large {
+    padding: calculateRem($input-large-padding);
+    padding-right: calculateRem(50px);
+  }
+
+  &.small {
+    border-width: calculateRem($size-border-small);
+    padding: calculateRem($input-small-padding);
+    padding-right: calculateRem(50px);
+  }
+
+  &.full {
+    flex-grow: 1;
+  }
+
+  &.primary {
+    @include focus {
+      border-color: $primary-focus-color;
+    }
+  }
+
+  &.secondary {
+    @include focus {
+      border-color: $secondary-focus-color;
+    }
+  }
+
+}
+
+@include mobile($min-mobile) {
+  .container {
+    max-width: 100%;
+    padding: 0 calculateRem(20px);
+  }
+}

@@ -94,7 +94,9 @@
 
 @mixin reset() {
   all: unset;
+  appearance: none;
   outline: revert;
+  box-sizing: border-box;
 }
 
 @mixin button-outlined {

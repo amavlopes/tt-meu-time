@@ -1,6 +1,38 @@
-<tt-header></tt-header>
+<div class="wrapper">
 
-<main>
-  <div class="container">
-  </div>
-</main>
+  <tt-header></tt-header>
+
+  <main>
+
+    <div class="container">
+
+      <form class="form" [formGroup]="form">
+
+        <div class="form__row">
+
+          <div class="control">
+            <tt-label ttLarge label="País" [for]="'country'"></tt-label>
+            <div class="select-wrapper">
+              <i class="icon fa-sharp fa-regular fa-chevron-down"></i>
+              <select id="country" class="small full" formControlName="country">
+                <option [ngValue]="defaultValue">Selecione</option>
+                <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
+      </form>
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <p>Form value: {{ form.value | json }}</p>
+
+    </div>
+
+  </main>
+
+</div>

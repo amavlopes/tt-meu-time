@@ -21,6 +21,10 @@ input {
     padding: calculateRem($input-small-padding);
   }
 
+  &.full {
+    flex-grow: 1;
+  }
+
   @include focus {
     outline: 0;
   }
