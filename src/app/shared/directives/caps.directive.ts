@@ -8,7 +8,7 @@ export class CapsDirective implements AfterViewInit {
   constructor(private hostElement: ElementRef, private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    let children = this.hostElement.nativeElement.querySelectorAll('label, button');
+    let children = this.hostElement.nativeElement.querySelectorAll('label, button, select');
     children.forEach((element: HTMLElement) => {
       this.renderer.addClass(element, 'caps')
     });
