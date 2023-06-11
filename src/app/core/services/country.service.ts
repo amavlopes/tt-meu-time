@@ -5,21 +5,35 @@ import { Observable, map } from 'rxjs';
 import { environment } from '@env/environment.development';
 import { Country } from '@shared/types/types';
 import { AuthResponse } from '../interfaces/auth-response.interface';
+import { Utils } from '../helpers/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
 
+  private _countries: Array<Country> | [] = [];
+
   constructor(private http: HttpClient) { }
 
-  getAllCountries(): Observable<Array<Country> | []> {
+  getCountries(): Observable<Array<Country> | []> {
     return this.http.get(`${environment.apiUrl}/countries`).pipe(
       map((stream: unknown) => {
         const { response } = stream as AuthResponse;
-        return (response as Array<Country>);
+        this._countries = (response as Array<Country>);
+        Utils.setLocalStorageItem('countries', this._countries);
+        return this._countries;
       })
     );
+  }
+
+  getCachedCountries(): Array<Country> | [] {
+    this._countries = Utils.getLocalStorageItem('countries');
+    return this._countries;
+  }
+
+  getCountryByName(name: string): Country | undefined {
+    return this._countries.find((country) => country.name === name);
   }
 
 }

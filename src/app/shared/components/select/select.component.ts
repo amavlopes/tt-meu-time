@@ -13,7 +13,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class SelectComponent implements ControlValueAccessor {
 
-  value!: {name: string} | any;
+  value!: any;
   disabled = false;
   touched = false;
 
@@ -43,7 +43,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   onSelectChange(event: Event) {
     this.value = (event.target as HTMLSelectElement).value;
-    if(this.value === "null") this.value = null;
+    if (this.value === "null") this.value = null;
     this.onChange(this.value);
     this.markAsTouched();
   }

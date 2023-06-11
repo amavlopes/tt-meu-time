@@ -20,7 +20,8 @@ export class TeamComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private countriesService: CountryService) {
     this.form = this.fb.group({
-      country: [this.defaultValue, Validators.required]
+      country: [this.defaultValue , Validators.required],
+      season: [ {value: this.defaultValue, disabled: true} , Validators.required]
     });
   }
 
@@ -28,22 +29,35 @@ export class TeamComponent implements OnInit {
     return this.form.get('country') as FormControl;
   }
 
-  ngOnInit(): void {
-
-    const countrySubscription = this.countriesService.getAllCountries().subscribe({
-      next: (countries: Array<Country> | []) => {
-        this.countries = countries;
-      },
-      error: (err: Error) => {
-        this.errorMessage = err.message;
-      },
-    });
-
-    this.subscription.add(countrySubscription);
-
+  get season(): FormControl {
+    return this.form.get('season') as FormControl;
   }
 
-  onChange() {
+  ngOnInit(): void {
+    this.getCountryList();
+    this.getSeasonList();
+  }
+
+  getCountryList() {
+    const countriesList = this.countriesService.getCachedCountries();
+    if(!!countriesList.length) {
+      this.countries = countriesList;
+    } else {
+      const countrySubscription = this.countriesService.getCountries().subscribe({
+        next: (countries: Array<Country> | []) => {
+          this.countries = countries;
+        },
+        error: (err: Error) => {
+          this.errorMessage = err.message;
+        },
+      });
+      this.subscription.add(countrySubscription);
+    }
+  }
+
+  getSeasonList() {}
+
+  onChange(control: any) {
     if (!!this.errorMessage) this.clearMessage();
   }
 
