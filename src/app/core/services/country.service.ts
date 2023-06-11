@@ -17,6 +17,7 @@ export class CountryService {
   constructor(private http: HttpClient) { }
 
   getCountries(): Observable<Array<Country> | []> {
+    console.log('Ops consuming countries from API')
     return this.http.get(`${environment.apiUrl}/countries`).pipe(
       map((stream: unknown) => {
         const { response } = stream as AuthResponse;
@@ -28,7 +29,8 @@ export class CountryService {
   }
 
   getCachedCountries(): Array<Country> | [] {
-    this._countries = Utils.getLocalStorageItem('countries');
+    console.log('I am getting countries from cache');
+    this._countries = Utils.getLocalStorageItem('countries') ?? [];
     return this._countries;
   }
 

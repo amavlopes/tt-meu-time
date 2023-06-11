@@ -23,7 +23,7 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() id!: string;
   @Input() label!: string;
   @Input() defaultValue: string | null = null;
-  @Input() items!: Array<{name: string}>;
+  @Input() items!: any[];
 
   writeValue(value: any): void {
     this.value = value;

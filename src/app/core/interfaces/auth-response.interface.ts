@@ -12,7 +12,7 @@ export interface AuthResponse {
     current: number,
     total: number
   },
-  response: ResponseStatus | Array<Country>
+  response: ResponseStatus | Array<Country> | Array<number>
 }
 
 export interface ResponseStatus {

@@ -10,17 +10,20 @@
 
         <div class="form__row">
 
-          <div class="control">
-            <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="onChange(country)"></tt-select>
+          <div class="control" *ngIf="!!countries.length">
+            <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="onChange()"></tt-select>
             <tt-validation *ngIf="country.dirty && country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation>
-            <tt-validation *ngIf="!!this.errorMessage" [message]="this.errorMessage" [type]="'alert'"></tt-validation>
           </div>
 
-          <div class="control">
-            <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="countries" (change)="onChange(season)"></tt-select>
+          <div class="control" *ngIf="!!seasons.length">
+            <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="seasons" (change)="onChange()"></tt-select>
             <tt-validation *ngIf="season.dirty && season.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
           </div>
 
+        </div>
+
+        <div class="form__row" *ngIf="!!this.errorMessage">
+          <tt-validation [message]="this.errorMessage" [type]="'alert'"></tt-validation>
         </div>
 
       </form>

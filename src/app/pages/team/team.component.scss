@@ -7,22 +7,20 @@
 }
 
 .container {
-  width: 959px;
-  margin: 0 auto;
+  @extend %container;
 }
 
 .form {
-  @include flexbox(calculateRem(10px), 'row');
-  width: 100%;
-
   &__row {
-    @include flexbox(calculateRem(10px));
-    flex-grow: 1;
+    display: grid;
+    gap: calculateRem(20px);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 .control {
   @include flexbox(calculateRem(10px));
+  flex-grow: 1;
 }
 
 @include mobile($min-mobile) {

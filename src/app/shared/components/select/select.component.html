@@ -6,7 +6,7 @@
 
   <select [id]="id" [name]="id" [disabled]="disabled" [(ngModel)]="value" (change)="onSelectChange($event)">
     <option [value]="defaultValue">Selecione</option>
-    <option *ngFor="let item of items" [value]="item.name">{{ item.name }}</option>
+    <option *ngFor="let item of items" [value]="item?.name ?? item">{{ item?.name ?? item }}</option>
   </select>
 
 </div>

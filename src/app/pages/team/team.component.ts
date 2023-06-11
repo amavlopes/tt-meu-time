@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { CountryService } from '@app/core/services/country.service';
-
-import { Country } from '@app/shared/types/types';
 import { Subscription } from 'rxjs';
+
+import { Country } from '@shared/types/types';
+import { CountryService } from '@core/services/country.service';
+import { SeasonService } from '@core/services/season.service';
 
 @Component({
   selector: 'tt-team',
@@ -12,16 +13,18 @@ import { Subscription } from 'rxjs';
 })
 export class TeamComponent implements OnInit {
 
+  countries: Array<Country> | [] = [];
+  seasons: Array<number> | [] = [];
+
   form!: FormGroup;
   defaultValue: string | null = null;
-  countries: Array<Country> | [] = [];
   errorMessage = '';
   subscription: Subscription = new Subscription();
 
-  constructor(private fb: FormBuilder, private countriesService: CountryService) {
+  constructor(private fb: FormBuilder, private countriesService: CountryService, private seasonService: SeasonService) {
     this.form = this.fb.group({
       country: [this.defaultValue , Validators.required],
-      season: [ {value: this.defaultValue, disabled: true} , Validators.required]
+      season: [ this.defaultValue , Validators.required]
     });
   }
 
@@ -40,24 +43,45 @@ export class TeamComponent implements OnInit {
 
   getCountryList() {
     const countriesList = this.countriesService.getCachedCountries();
-    if(!!countriesList.length) {
+
+    if (!!countriesList.length) {
       this.countries = countriesList;
-    } else {
-      const countrySubscription = this.countriesService.getCountries().subscribe({
-        next: (countries: Array<Country> | []) => {
-          this.countries = countries;
-        },
-        error: (err: Error) => {
-          this.errorMessage = err.message;
-        },
-      });
-      this.subscription.add(countrySubscription);
-    }
+      return;
+     }
+
+    const countrySubscription = this.countriesService.getCountries().subscribe({
+      next: (countries: Array<Country> | []) => {
+        this.countries = countries;
+      },
+      error: (err: Error) => {
+        this.errorMessage = err.message;
+      },
+    });
+
+    this.subscription.add(countrySubscription);
   }
 
-  getSeasonList() {}
+  getSeasonList() {
+    const seasonsList = this.seasonService.getCachedSeasons();
 
-  onChange(control: any) {
+    if(!!seasonsList.length) {
+      this.seasons = seasonsList;
+      return;
+    }
+
+    const seasonSubscription = this.seasonService.getSeasons().subscribe({
+      next: (seasons: Array<number> | []) => {
+        this.seasons = seasons;
+      },
+      error: (err: Error) => {
+        this.errorMessage = err.message;
+      },
+    });
+
+    this.subscription.add(seasonSubscription);
+  }
+
+  onChange() {
     if (!!this.errorMessage) this.clearMessage();
   }
 
