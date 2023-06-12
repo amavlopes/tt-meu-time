@@ -85,3 +85,8 @@ export type Fixture = {
   statistics_fixtures: boolean;
   statistics_players: boolean;
 };
+
+export type FormFeedback = {
+  msg: string;
+  type: ValidationType
+}

@@ -2,7 +2,7 @@
 @import "/src/assets/scss/mixins";
 
 .control {
-  @include flexbox(calculateRem(10px));
+  @include flexbox(10px);
 }
 
 input {
@@ -13,7 +13,7 @@ input {
   @include transitions(border-color);
 
   &.large {
-    padding: calculateRem($input-large-padding);
+    padding: calculateRem($input-small-padding);
   }
 
   &.small {
@@ -47,10 +47,10 @@ input {
 
 }
 
-@include mobile($min-mobile) {
+@include mobile-up {
   input {
     &.large {
-      padding: calculateRem($input-small-padding);
+      padding: calculateRem($input-large-padding);
     }
   }
 }

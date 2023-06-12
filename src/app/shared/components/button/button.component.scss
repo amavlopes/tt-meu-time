@@ -25,9 +25,9 @@
 
   &.large {
     font-weight: $extrabold;
-    line-height: calculateRem($size-larger);
-    @include fontSize($size-large);
-    @include padding(15px, 40px);
+    line-height: calculateRem($size-small);
+    @include fontSize($size-small);
+    @include padding(14px, 20px);
   }
 
   &.small {
@@ -162,11 +162,12 @@
 
 }
 
-@include mobile($min-mobile) {
+@include mobile-up {
   .button {
     &.large {
-      @include fontSize($size-small);
-      @include padding(10px, 20px);
+      line-height: calculateRem($size-larger);
+      @include fontSize($size-large);
+      @include padding(15px, 40px);
     }
   }
 }

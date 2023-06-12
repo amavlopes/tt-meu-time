@@ -46,7 +46,7 @@ $extrabold: 700;
 
 // Others
 $letter-spacing: 3px;
-$line-height: 200%;
+$line-height: 150%;
 
 // Sizes
 $font-size-base: 10px;
@@ -75,12 +75,18 @@ $label-small: $size-small;
 // Inputs
 $input-normal: $size-small;
 $input-large-padding: 18px;
-$input-small-padding: 10px;
+$input-small-padding: 14px;
 
 // Buttons
 $size-border-small: 1px;
 $size-border-large: 2px;
 $size-radius: 6px;
+
+// Widths
+$width-desktop: 1140px;
+$width-tablet-landscape: 960px;
+$width-tablet-portrait: 720px;
+$width-mobile: 540px;
 
 // Flex layout
 

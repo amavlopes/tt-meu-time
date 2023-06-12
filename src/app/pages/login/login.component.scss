@@ -8,11 +8,11 @@
   justify-content: center;
   margin: 0;
   padding: 0;
-  @include flexbox(0, 'row');;
+  @include flexbox(0px, 'row');;
 }
 
 .container {
-  max-width: 420px;
+  @include padding(0px, 20px);
 
   .group {
     &__h1 {
@@ -27,10 +27,10 @@
 }
 
 .form {
-  @include flexbox(calculateRem(10px));
+  @include flexbox(10px);
 
   &__row {
-    @include flexbox(calculateRem(10px));
+    @include flexbox(10px);
   }
 
   p, a {
@@ -39,10 +39,9 @@
   }
 }
 
-@include mobile($min-mobile) {
+@include mobile-up {
   .container {
-    max-width: 100%;
-    padding: 0 calculateRem(20px);
+    max-width: 420px;
   }
 
   .group {

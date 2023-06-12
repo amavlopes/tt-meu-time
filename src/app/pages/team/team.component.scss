@@ -2,30 +2,43 @@
 @import "/src/assets/scss/mixins";
 
 .wrapper {
-  display: grid;
-  row-gap: calculateRem(40px);
+  @include flexbox(40px);
 }
 
 .container {
   @extend %container;
+  @include flexbox(40px);
 }
 
 .form {
+  @include flexbox(40px);
+
   &__row {
     display: grid;
     gap: calculateRem(20px);
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
+
+    &--full {
+      display: block;
+    }
+  }
+
+  .control {
+    @include flexbox(5px);
+    flex-grow: 1;
+    white-space: nowrap;
   }
 }
 
-.control {
-  @include flexbox(calculateRem(10px));
-  flex-grow: 1;
+@include tablet-portrait {
+  .form__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-@include mobile($min-mobile) {
-  .container {
-    max-width: 100%;
-    padding: 0 calculateRem(20px);
+@include tablet-landscape {
+  .form__row {
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: calculateRem(10px);
   }
 }

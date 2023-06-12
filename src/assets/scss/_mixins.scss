@@ -37,7 +37,7 @@
   h4,
   h5,
   h6 {
-      @content;
+    @content;
   }
 }
 
@@ -50,7 +50,9 @@
 }
 
 @mixin focus() {
-  &:focus, &:focus-visible, &:focus-within {
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
     @content;
   }
 }
@@ -78,16 +80,15 @@
     @content;
   }
   @include visited {
-
   }
 }
 
 // Layouts
 
-@mixin flexbox($gap: $gap, $direction: 'column'){
+@mixin flexbox($gap: $gap, $direction: "column") {
   display: flex;
   flex-direction: #{$direction};
-  gap: $gap;
+  gap: calculateRem($gap);
 }
 
 // Styles
@@ -114,7 +115,7 @@
   $result: ();
 
   @each $padding in $paddings {
-    $result: append($result , calculateRem($padding) , $separator: auto)
+    $result: append($result, calculateRem($padding), $separator: auto);
   }
 
   padding: $result;
@@ -132,13 +133,47 @@
   transition: $transition;
 }
 
-%container {
-  width: $container;
-  margin: 0 auto;
+@mixin mobile-up {
+  @media only screen and (min-width: 576px) {
+    @content;
+  }
 }
 
-@mixin mobile($width) {
-  @media only screen and (max-width: $width) {
+@mixin tablet-portrait {
+  @media only screen and (min-width:768px) {
     @content;
+  }
+}
+
+@mixin tablet-landscape {
+  @media only screen and (min-width:992px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media only screen and (min-width:1200px) {
+    @content;
+  }
+}
+
+%container {
+  margin: 0 auto;
+  padding: 0 calculateRem(20px);
+
+  @include mobile-up {
+    max-width: calculateRem($width-mobile);
+  }
+
+  @include tablet-portrait {
+    max-width: calculateRem($width-tablet-portrait);
+  }
+
+  @include tablet-landscape {
+    max-width: calculateRem($width-tablet-landscape);
+  }
+
+  @include desktop {
+    max-width: calculateRem($width-desktop);
   }
 }

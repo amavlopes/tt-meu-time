@@ -1,6 +1,10 @@
 @import "/src/assets/scss/variables";
 @import "/src/assets/scss/mixins";
 
+:host {
+  @include flexbox(5px);
+}
+
 .select-wrapper {
   align-items: center;
   cursor: pointer;
@@ -29,6 +33,7 @@ select {
   border: solid calculateRem($size-border-large) $border-color;
   font-size: $input-normal;
   grid-area: select;
+  line-height: 150%;
   @include transitions(border-color);
 
   &::-ms-expand {

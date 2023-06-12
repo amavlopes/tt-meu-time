@@ -4,7 +4,7 @@
 .label {
 
   &.large {
-    font-size: calculateRem($label-large);
+    font-size: calculateRem($label-small);
   }
 
   &.small {
@@ -12,10 +12,10 @@
   }
 }
 
-@include mobile($min-mobile) {
+@include mobile-up {
   .label {
     &.large {
-      font-size: calculateRem($label-small);
+      font-size: calculateRem($label-large);
     }
   }
 }
