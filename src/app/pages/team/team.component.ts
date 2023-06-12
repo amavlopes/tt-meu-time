@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Subscription } from 'rxjs';
 
 import { Country } from '@shared/types/types';
@@ -12,21 +17,28 @@ import { SeasonService } from '@core/services/season.service';
   styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
-
   countries: Array<Country> | [] = [];
   seasons: Array<number> | [] = [];
+  leagues: Array<any> | [] = [];
 
   form!: FormGroup;
   defaultValue: string | null = null;
   errorMessage = '';
   subscription: Subscription = new Subscription();
 
-  constructor(private fb: FormBuilder, private countriesService: CountryService, private seasonService: SeasonService) {
+  constructor(
+    private fb: FormBuilder,
+    private countriesService: CountryService,
+    private seasonService: SeasonService
+  ) {
     this.form = this.fb.group({
-      country: [this.defaultValue , Validators.required],
-      season: [ this.defaultValue , Validators.required]
+      country: [this.defaultValue, Validators.required],
+      season: [this.defaultValue],
+      league: [this.defaultValue, Validators.required],
+      team: [this.defaultValue, Validators.required]
     });
   }
+
 
   get country(): FormControl {
     return this.form.get('country') as FormControl;
@@ -36,50 +48,96 @@ export class TeamComponent implements OnInit {
     return this.form.get('season') as FormControl;
   }
 
+  get league(): FormControl {
+    return this.form.get('league') as FormControl;
+  }
+
+
   ngOnInit(): void {
-    this.getCountryList();
-    this.getSeasonList();
+    this.manageCountryList();
+    this.manageSeasonList();
+
+    this.updateFormByCountry();
+    this.updateFormBySeason();
   }
 
-  getCountryList() {
-    const countriesList = this.countriesService.getCachedCountries();
+  manageCountryList() {
+    let countryList = this.countriesService.getCachedCountries();
 
-    if (!!countriesList.length) {
-      this.countries = countriesList;
-      return;
-     }
-
-    const countrySubscription = this.countriesService.getCountries().subscribe({
-      next: (countries: Array<Country> | []) => {
-        this.countries = countries;
-      },
-      error: (err: Error) => {
-        this.errorMessage = err.message;
-      },
-    });
-
-    this.subscription.add(countrySubscription);
-  }
-
-  getSeasonList() {
-    const seasonsList = this.seasonService.getCachedSeasons();
-
-    if(!!seasonsList.length) {
-      this.seasons = seasonsList;
+    if (!!countryList.length) {
+      this.countries = countryList;
       return;
     }
 
-    const seasonSubscription = this.seasonService.getSeasons().subscribe({
-      next: (seasons: Array<number> | []) => {
-        this.seasons = seasons;
+    const subscription = this.countriesService.getCountries().subscribe({
+      next: (stream: Country[] | []) => {
+        this.countries = stream;
       },
       error: (err: Error) => {
         this.errorMessage = err.message;
       },
     });
-
-    this.subscription.add(seasonSubscription);
+    this.subscription.add(subscription);
   }
+
+  manageSeasonList() {
+    let seasonList = this.seasonService.getCachedSeasons();
+
+    if (!!seasonList.length) {
+      this.seasons = seasonList;
+      return;
+    }
+
+    const subscription = this.seasonService.getSeasons().subscribe({
+      next: (stream: number[] | []) => {
+        this.seasons = stream;
+      },
+      error: (err: Error) => {
+        this.errorMessage = err.message;
+      },
+    });
+    this.subscription.add(subscription);
+  }
+
+
+  updateFormByCountry() {
+    this.country?.valueChanges.subscribe((country: string) => {
+      if (!country) return;
+
+      this.resetControlsAfterCurrentOne('country');
+
+      let params = { country };
+      this.getLeagueList(params);
+    });
+  }
+
+  updateFormBySeason() {
+    this.season?.valueChanges.subscribe((season: string) => {
+      if (!season) return;
+
+      this.resetControlsAfterCurrentOne('season');
+
+      let params = {'country': this.country.value, season};
+      this.getLeagueList(params);
+    });
+  }
+
+  resetControlsAfterCurrentOne(control: string) {
+    const controlKeys = Object.keys(this.form.value);
+    const currentIndex = controlKeys.findIndex(c => c === control);
+
+    controlKeys.forEach((key, index) => {
+      if (index > currentIndex) {
+        this.form.get(key)?.setValue(this.defaultValue);
+      }
+    });
+  }
+
+  getLeagueList<T extends { [key: string]: string }>(options: T) {
+    console.log('getLeagueList: ', options);
+    // this.leagueService
+  }
+
 
   onChange() {
     if (!!this.errorMessage) this.clearMessage();
@@ -89,8 +147,8 @@ export class TeamComponent implements OnInit {
     this.errorMessage = '';
   }
 
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
 }

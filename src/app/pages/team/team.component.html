@@ -20,6 +20,11 @@
             <tt-validation *ngIf="season.dirty && season.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
           </div>
 
+          <div class="control" *ngIf="!!leagues.length">
+            <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="onChange()"></tt-select>
+            <tt-validation *ngIf="league.dirty && league.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
+          </div>
+
         </div>
 
         <div class="form__row" *ngIf="!!this.errorMessage">
