@@ -4,20 +4,19 @@ import { Observable, map } from 'rxjs';
 
 import { environment } from '@env/environment.development';
 import { Country } from '@shared/types/types';
-import { AuthResponse } from '../interfaces/auth-response.interface';
-import { Utils } from '../helpers/utils';
+import { AuthResponse } from '@shared/types/types';
+import { Utils } from '@core/helpers/utils';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CountryService {
 
-  private _countries: Array<Country> | [] = [];
+  private _countries: Array<Country> = [];
 
   constructor(private http: HttpClient) { }
 
-  getCountries(): Observable<Array<Country> | []> {
-    console.log('Ops consuming countries from API')
+  getCountries(): Observable<Array<Country>> {
     return this.http.get(`${environment.apiUrl}/countries`).pipe(
       map((stream: unknown) => {
         const { response } = stream as AuthResponse;
@@ -28,8 +27,7 @@ export class CountryService {
     );
   }
 
-  getCachedCountries(): Array<Country> | [] {
-    console.log('I am getting countries from cache');
+  getCachedCountries(): Array<Country> {
     this._countries = Utils.getLocalStorageItem('countries') ?? [];
     return this._countries;
   }

@@ -48,6 +48,10 @@ export class SelectComponent implements ControlValueAccessor {
     this.markAsTouched();
   }
 
+  onClick() {
+    this.markAsTouched();
+  }
+
   markAsTouched() {
     if (!this.touched) {
       this.touched = true;

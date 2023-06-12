@@ -39,6 +39,11 @@ select {
     outline: 0;
   }
 
+  &[disabled] {
+    @include HexToRgba('background-color', $border-color, .3);
+    @include HexToRgba('color', #a3a3a3, 1);
+  }
+
   &.large {
     padding: calculateRem($input-large-padding);
     padding-right: calculateRem(50px);

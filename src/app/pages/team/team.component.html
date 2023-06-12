@@ -10,19 +10,20 @@
 
         <div class="form__row">
 
-          <div class="control" *ngIf="!!countries.length">
+          <div class="control">
             <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="onChange()"></tt-select>
             <tt-validation *ngIf="country.dirty && country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation>
           </div>
 
-          <div class="control" *ngIf="!!seasons.length">
+          <div class="control">
             <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="seasons" (change)="onChange()"></tt-select>
-            <tt-validation *ngIf="season.dirty && season.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
           </div>
 
-          <div class="control" *ngIf="!!leagues.length">
+          <div class="control">
             <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="onChange()"></tt-select>
             <tt-validation *ngIf="league.dirty && league.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
+            <tt-validation *ngIf="!leagues.length && !loadingLeagues" [message]="'0 resultad(o)s'"></tt-validation>
+            <tt-loader *ngIf="loadingLeagues" message="Carregando"></tt-loader>
           </div>
 
         </div>

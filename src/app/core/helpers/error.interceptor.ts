@@ -5,12 +5,11 @@ import {
   HttpEvent,
   HttpInterceptor,
   HttpResponse,
-  HttpErrorResponse,
 } from '@angular/common/http';
 import { Observable, catchError, map, tap, throwError } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
-import { AuthResponse } from '@core/interfaces/auth-response.interface';
+import { AuthResponse } from '@shared/types/types';
 import { HttpError } from './http-error.error';
 
 @Injectable()

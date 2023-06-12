@@ -10,7 +10,7 @@ import {
 } from 'rxjs';
 
 import { environment } from '@env/environment.development';
-import { AuthResponse, ResponseStatus } from '@core/interfaces/auth-response.interface';
+import { AuthResponse, ResponseStatus } from '@shared/types/types';
 import { User } from '@core/models/user.model';
 import { Utils } from '@core/helpers/utils';
 import { Router } from '@angular/router';
