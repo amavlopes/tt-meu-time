@@ -8,41 +8,44 @@
 
       <div class="text-container">
         <h2>Selecione seu time</h2>
-        <h3>Para visualizar informações do time desejado, selecione as opções abaixo:</h3>
+        <p>Para visualizar informações do time desejado, selecione as opções abaixo:</p>
       </div>
 
-      <form class="form" [formGroup]="form">
+      <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
 
         <div class="form__row">
 
           <div class="control">
-            <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="onChange()"></tt-select>
-            <tt-validation *ngIf="country.dirty && country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation>
+            <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="OnChange()"></tt-select>
           </div>
 
           <div class="control">
-            <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="seasons" (change)="onChange()"></tt-select>
+            <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="seasons" (change)="OnChange()"></tt-select>
           </div>
 
           <div class="control">
-            <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="onChange()"></tt-select>
-            <tt-validation *ngIf="league.dirty && league.hasError('required')" [message]="'*Campo obrigatório: Temporada'" [type]="'alert'"></tt-validation>
-            <tt-validation *ngIf="!leagues.length && !loadingLeagues" [message]="'0 resultad(o)s'"></tt-validation>
-            <tt-loader *ngIf="loadingLeagues" message="Carregando"></tt-loader>
+            <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="OnChange()"></tt-select>
+            <tt-loader *ngIf="loading" message="Carregando"></tt-loader>
+          </div>
+
+          <div class="control">
+            <tt-select ttPrimary ttSmall id="team" formControlName="team" label="Time" [defaultValue]="defaultValue" [items]="teams" (change)="OnChange()"></tt-select>
+            <tt-loader *ngIf="loading" message="Carregando"></tt-loader>
           </div>
 
         </div>
 
-        <div class="form__row" *ngIf="!!this.errorMessage">
-          <tt-validation [message]="this.errorMessage" [type]="'alert'"></tt-validation>
+        <div class="form__row form__row--full" >
+
+          <tt-validation *ngIf="!!this.formFeeback" [message]="this.formFeeback.msg" [type]="formFeeback.type"></tt-validation>
+        </div>
+
+        <div class="form__row form__row--full">
+          <tt-button ttPrimary ttLarge ttCaps [label]="'Pesquisar'" [disabled]="!form.valid"></tt-button>
         </div>
 
       </form>
 
-      <br>
-      <br>
-      <br>
-      <br>
       <p>Form value: {{ form.value | json }}</p>
 
     </div>

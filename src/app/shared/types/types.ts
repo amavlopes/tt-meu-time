@@ -14,13 +14,14 @@ export type AuthResponse = {
   errors: {
     token: string;
     bug?: string;
+    requests?: string;
   };
   results: number;
   paging: {
     current: number;
     total: number;
   };
-  response: ResponseStatus | Array<Country> | Array<number> | Array<LeagueResponse>;
+  response: ResponseStatus | Array<Country | number | LeagueResponse | TeamResponse>;
 };
 
 export type ResponseStatus = {
@@ -89,4 +90,36 @@ export type Fixture = {
 export type FormFeedback = {
   msg: string;
   type: ValidationType
+}
+
+export type TeamResponse = {
+  team: Team;
+  venue: Venue;
+};
+
+export type Team = {
+  id: number,
+  name: string,
+  code: string,
+  country: string,
+  founded: number,
+  national: boolean,
+  logo: string
+}
+
+export type Venue = {
+  id: 556,
+  name: string,
+  address: string,
+  city: string,
+  capacity: number,
+  surface: string,
+  image: string
+}
+
+export type Loading = {
+    [key: string]: {
+      status: boolean,
+      message: string
+    }
 }

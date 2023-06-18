@@ -42,8 +42,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       const { errors } = <AuthResponse>httpEvent.body;
       if (errors && errors.token) {
         throw new HttpError(1, errors.token);
-      } else if (errors && errors.bug) {
-        throw new HttpError(2, errors.bug);
+      } else if (errors && (errors.bug || errors.requests)) {
+        throw new HttpError(2, (errors.bug || errors.requests));
       }
     }
   }
@@ -61,6 +61,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         errorMessage = 'Algo deu errado. Tente novamente mais tarde.';
         break;
     }
+    console.error('[ERROR]: ', (error?.message));
     return throwError(() => new HttpError(error.status, errorMessage));
   }
 

@@ -1,0 +1,52 @@
+<div class="wrapper">
+
+  <tt-header></tt-header>
+
+  <main>
+
+    <div class="container">
+
+      <div class="text-container">
+        <h2>Selecione seu time</h2>
+        <p>Para visualizar informações do time desejado, selecione as opções abaixo:</p>
+      </div>
+
+      <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="form__row">
+
+          <div class="control">
+            <tt-select ttPrimary ttSmall id="country" name="country" formControlName="country" label="País" [defaultValue]="defaultValue" [items]="countries" (change)="onChange()"></tt-select>
+            <!-- <tt-validation *ngIf="country.dirty && country.hasError('required')" [message]="'*Campo obrigatório: País'" [type]="'alert'"></tt-validation> -->
+          </div>
+
+          <div class="control">
+            <tt-select ttPrimary ttSmall id="season" formControlName="season" label="Temporada" [defaultValue]="defaultValue" [items]="seasons" (change)="onChange()"></tt-select>
+          </div>
+
+          <div class="control">
+            <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="onChange()"></tt-select>
+            <!-- <tt-validation *ngIf="league.dirty && league.hasError('required')" [message]="'*Campo obrigatório: Liga'" [type]="'alert'"></tt-validation> -->
+            <!-- <tt-validation *ngIf="form.dirty && !leagues.length && !loadingLeagues" [message]="'Nenhuma liga'"></tt-validation> -->
+          </div>
+
+        </div>
+
+        <div class="form__row form__row--full" >
+          <tt-loader *ngIf="loading" message="Carregando"></tt-loader>
+          <tt-validation *ngIf="!!this.formFeeback" [message]="this.formFeeback.msg" [type]="formFeeback.type"></tt-validation>
+        </div>
+
+        <div class="form__row form__row--full">
+          <tt-button ttPrimary ttLarge ttCaps [label]="'Pesquisar'" [disabled]="!form.valid"></tt-button>
+        </div>
+
+      </form>
+
+      <p>Form value: {{ form.value | json }}</p>
+
+    </div>
+
+  </main>
+
+</div>
