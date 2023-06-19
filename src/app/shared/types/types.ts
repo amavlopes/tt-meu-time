@@ -21,7 +21,9 @@ export type AuthResponse = {
     current: number;
     total: number;
   };
-  response: ResponseStatus | Array<Country | number | LeagueResponse | TeamResponse>;
+  response:
+    | ResponseStatus
+    | Array<Country | number | LeagueResponse | TeamResponse | PlayerResponse>;
 };
 
 export type ResponseStatus = {
@@ -69,7 +71,7 @@ export type Season = {
 };
 
 export type Coverage = {
-  fixtures: Fixture;
+  fixtures: FixtureCoverage;
   standings: boolean;
   players: boolean;
   top_scorers: boolean;
@@ -80,7 +82,7 @@ export type Coverage = {
   odds: boolean;
 };
 
-export type Fixture = {
+export type FixtureCoverage = {
   events: boolean;
   lineups: boolean;
   statistics_fixtures: boolean;
@@ -89,8 +91,8 @@ export type Fixture = {
 
 export type FormFeedback = {
   msg: string;
-  type: ValidationType
-}
+  type: ValidationType;
+};
 
 export type TeamResponse = {
   team: Team;
@@ -98,28 +100,69 @@ export type TeamResponse = {
 };
 
 export type Team = {
-  id: number,
-  name: string,
-  code: string,
-  country: string,
-  founded: number,
-  national: boolean,
-  logo: string
-}
+  id: number;
+  name: string;
+  code: string;
+  country: string;
+  founded: number;
+  national: boolean;
+  logo: string;
+};
 
 export type Venue = {
-  id: 556,
-  name: string,
-  address: string,
-  city: string,
-  capacity: number,
-  surface: string,
-  image: string
-}
+  id: 556;
+  name: string;
+  address: string;
+  city: string;
+  capacity: number;
+  surface: string;
+  image: string;
+};
 
 export type Loading = {
-    [key: string]: {
-      status: boolean,
-      message: string
-    }
+  [key: string]: {
+    status: boolean;
+    message: string;
+  };
+};
+
+export type PlayerResponse = {
+  player: Player,
+  statistics: any
+}
+
+export type Player = {
+  id: number;
+  name: string;
+  firstname: string;
+  lastname: string;
+  age: number;
+  birth: {
+    date: string;
+    place: string;
+    country: string;
+  };
+  nationality: string;
+  height: string;
+  weight: string;
+  injured: false;
+  photo: string;
+};
+
+export type Lineup = {
+  formation: string,
+  played: number
+}
+
+export type FixturePlayer = {
+  home: number,
+  away: number,
+  total: number
+};
+
+export type FixturesPlayer = {
+  played: FixturePlayer,
+  wins: FixturePlayer,
+  draws: FixturePlayer,
+  loses: FixturePlayer
 }

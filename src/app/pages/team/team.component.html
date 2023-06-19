@@ -25,12 +25,12 @@
 
           <div class="control">
             <tt-select ttPrimary ttSmall id="league" formControlName="league" label="Liga" [defaultValue]="defaultValue" [items]="leagues" (change)="OnChange()"></tt-select>
-            <tt-loader *ngIf="loading" message="Carregando"></tt-loader>
+            <tt-loader *ngIf="loadingLeagues" message="Carregando"></tt-loader>
           </div>
 
           <div class="control">
             <tt-select ttPrimary ttSmall id="team" formControlName="team" label="Time" [defaultValue]="defaultValue" [items]="teams" (change)="OnChange()"></tt-select>
-            <tt-loader *ngIf="loading" message="Carregando"></tt-loader>
+            <tt-loader *ngIf="loadingTeams" message="Carregando"></tt-loader>
           </div>
 
         </div>

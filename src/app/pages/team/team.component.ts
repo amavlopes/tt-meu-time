@@ -12,7 +12,8 @@ import {
   FormFeedback,
   League,
   LeagueResponse,
-  Loading,
+  Player,
+  PlayerResponse,
   Team,
   TeamResponse,
   ValidationType,
@@ -20,7 +21,7 @@ import {
 import { CountryService } from '@core/services/country.service';
 import { SeasonService } from '@core/services/season.service';
 import { LeagueService } from '@app/core/services/league.service';
-import { TeamService } from '@app/core/services/team.service';
+import { HttpOptions, TeamService } from '@app/core/services/team.service';
 
 @Component({
   selector: 'tt-team',
@@ -28,12 +29,15 @@ import { TeamService } from '@app/core/services/team.service';
   styleUrls: ['./team.component.scss'],
 })
 export class TeamComponent implements OnInit {
+  loadingLeagues = false;
+  loadingTeams = false;
+  loadingForm = false;
 
-  loading = false;
   countries: Array<Country> = [];
   seasons: Array<number> = [];
-  leagues: Array<League> = [];
-  teams: Array<Team> = [];
+  leagues: Array<Pick<League, 'id' | 'name'>> = [];
+  teams: Array<Pick<Team, 'id' | 'name'>> = [];
+  players: Array<Pick<Player, 'name' | 'age' | 'nationality'>> = [];
 
   form!: FormGroup;
   defaultValue: string | null = null;
@@ -55,10 +59,7 @@ export class TeamComponent implements OnInit {
         { value: this.defaultValue, disabled: true },
         Validators.required,
       ],
-      team: [
-        { value: this.defaultValue, disabled: true },
-        Validators.required,
-      ],
+      team: [{ value: this.defaultValue, disabled: true }, Validators.required],
     });
   }
 
@@ -79,7 +80,6 @@ export class TeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.getCountryList();
     this.getSeasonList();
 
@@ -91,14 +91,13 @@ export class TeamComponent implements OnInit {
   getControlsLoadingStatus(): Array<{ [key: string]: boolean }> {
     let controlKeys = Object.keys(this.form.value);
     const loadingStatus: Array<{ [key: string]: boolean }> = [];
-    controlKeys.forEach(key => {
+    controlKeys.forEach((key) => {
       loadingStatus.push({
-        [key]: false
-      })
+        [key]: false,
+      });
     });
     return loadingStatus;
   }
-
 
   getCountryList() {
     let countryList = this.countriesService.getCachedCountries();
@@ -141,22 +140,22 @@ export class TeamComponent implements OnInit {
     this.subscription.add(subscription);
   }
 
-  getLeagueList<T extends { [key: string]: string }>(options: T) {
-    this.loading = true;
+  getLeagueList(options: HttpOptions) {
+    this.loadingLeagues = true;
     this.enableDisableControl(false, this.league);
 
     const subscription = this.leagueService
       .getLeagues(options)
       .pipe(
         finalize(() => {
-          this.loading = false;
+          this.loadingLeagues = false;
           this.enableDisableControl(!!this.leagues.length, this.league);
         })
       )
       .subscribe({
         next: (stream: LeagueResponse[]) => {
           const response = stream.map((s) => s.league);
-          this.leagues = response;
+          this.leagues = response.map((l: League) => ({ id: l.id, name: l.name }));;
         },
         error: (err: Error) => {
           this.errorMessage = err.message;
@@ -165,22 +164,22 @@ export class TeamComponent implements OnInit {
     this.subscription.add(subscription);
   }
 
-  getTeamList<T extends { [key: string]: string }>(options: T) {
-    this.loading = true;
+  getTeamList(options: HttpOptions) {
+    this.loadingTeams = true;
     this.enableDisableControl(false, this.team);
 
     const subscription = this.teamService
       .getTeams(options)
       .pipe(
         finalize(() => {
-          this.loading = false;
+          this.loadingTeams = false;
           this.enableDisableControl(!!this.teams.length, this.team);
         })
       )
       .subscribe({
         next: (stream: TeamResponse[]) => {
           const response = stream.map((s) => s.team);
-          this.teams = response;
+          this.teams = response.map((t: Team) => ({ id: t.id, name: t.name }));
         },
         error: (err: Error) => {
           this.errorMessage = err.message;
@@ -188,7 +187,6 @@ export class TeamComponent implements OnInit {
       });
     this.subscription.add(subscription);
   }
-
 
   updateFormByCountry() {
     this.country?.valueChanges.subscribe((country: string) => {
@@ -220,7 +218,6 @@ export class TeamComponent implements OnInit {
 
   updateFormByLeague() {
     this.league?.valueChanges.subscribe((league: string) => {
-
       this.clearValidationMessage();
 
       if (!league) return;
@@ -233,7 +230,6 @@ export class TeamComponent implements OnInit {
       this.getTeamList(params);
     });
   }
-
 
   setValidationMessage(msg: string, type: ValidationType) {
     this.formFeeback = { msg, type };
@@ -250,7 +246,6 @@ export class TeamComponent implements OnInit {
     controlKeys.forEach((key, index) => {
       if (index > currentIndex) {
         this.form.get(key)?.setValue(this.defaultValue);
-        // this.form.get(key)?.updateValueAndValidity();
       }
     });
   }
@@ -262,7 +257,6 @@ export class TeamComponent implements OnInit {
     controlKeys.forEach((key, index) => {
       if (index > currentIndex) {
         this.form.get(key)?.disable();
-        // this.form.get(key)?.updateValueAndValidity();
       }
     });
   }
@@ -294,7 +288,34 @@ export class TeamComponent implements OnInit {
   OnChange() {}
 
   onSubmit() {
+
     if (!this.form.valid) return;
+
+    this.loadingForm = true;
+    this.getPlayerList();
+
+  }
+
+  getPlayerList() {
+    const subscription = this.teamService
+      .getPlayers(this.form.value)
+      .pipe(
+        finalize(() => {
+          this.loadingForm = false;
+          this.enableDisableControl(!!this.teams.length, this.team);
+        })
+      )
+      .subscribe({
+        next: (stream: PlayerResponse[]) => {
+          const response = stream.map((s) => s.player);
+          this.players = response.map((p: Player) => ({ name: p.name, age: p.age, nationality: p.nationality }));
+          console.log('players: ', this.players);
+        },
+        error: (err: Error) => {
+          this.errorMessage = err.message;
+        },
+      });
+    this.subscription.add(subscription);
   }
 
   ngOnDestroy(): void {
